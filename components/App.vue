@@ -1,5 +1,5 @@
 <template>
-    <div class="grid grid-rows-3 grid-cols-8 gap-2">
+    <div class="grid grid-cols-8 gap-2">
         <main-card class="col-span-4">
             <div class="h-24">
                 <h1>
@@ -47,14 +47,13 @@
             </ol>
         </main-card>
         <main-card class="col-span-4">
-            <div class="bg-white h-full w-full flex">
-                <p class="m-auto">This will be the data content</p>
+            <selector-row></selector-row>
+            <div class="bg-white p-2 border-radius-2">
+                <p>This will be the data content</p>
             </div>
         </main-card>
         <main-card class="col-span-4 flex">
-            <div class="bg-white h-full w-full flex">
-                <p class="m-auto">This will be the plot content</p>
-            </div>
+            <p class="m-auto">This will be the plot content</p>
         </main-card>
         <main-card class="col-span-8 flex">
             <h1 class="m-auto">This will be the footer content</h1>
