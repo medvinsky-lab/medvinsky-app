@@ -20,6 +20,7 @@ export default {
         link: [
             { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
             { rel: 'stylesheet', href: 'https://css.gg/chevron-down.css' },
+            { rel: 'stylesheet', href: 'https://css.gg/chevron-up.css' },
         ],
     },
     // Global CSS: https://go.nuxtjs.dev/config-css
