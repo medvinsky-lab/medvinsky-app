@@ -24,6 +24,7 @@ export default {
             required: true,
         },
     },
+    emits: ['item-click'],
     data() {
         return {
             hover: false,
@@ -36,6 +37,7 @@ export default {
         updateState() {
             if (this.type === 'dataset') {
                 this.$store.dispatch('setDataset', this.value);
+                this.$emit('item-click');
             }
         },
     },

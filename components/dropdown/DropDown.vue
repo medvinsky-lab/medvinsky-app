@@ -15,7 +15,14 @@
             v-if="active"
             class="bg-white w-full text-left rounded mt-2 ring-2 ring-gray-200"
         >
-            <slot></slot>
+            <drop-down-item
+                v-for="item in items"
+                :key="item.id"
+                :type="item.type"
+                :value="item.id"
+                @item-click="toggle"
+                >{{ item.name }}</drop-down-item
+            >
         </div>
     </div>
 </template>
@@ -30,6 +37,10 @@ export default {
         description: {
             type: String,
             default: 'description',
+        },
+        items: {
+            type: Array,
+            required: true,
         },
     },
     data() {
