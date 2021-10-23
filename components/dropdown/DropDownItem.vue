@@ -1,24 +1,43 @@
 <template>
-    <div
+    <button
         :class="{ 'bg-gray-100': hover }"
+        class="w-full text-left"
         @mouseenter="hoverToggle"
         @mouseleave="hoverToggle"
+        @click="updateState"
     >
-        <p class="p-2">This is a dropdown item</p>
-    </div>
+        <p class="p-2">
+            <slot></slot>
+        </p>
+    </button>
 </template>
 
 <script>
 export default {
+    props: {
+        type: {
+            type: String,
+            required: true,
+        },
+        value: {
+            type: String,
+            required: true,
+        },
+    },
     data() {
         return {
             hover: false,
-        }
+        };
     },
     methods: {
         hoverToggle() {
-            this.hover = !this.hover
+            this.hover = !this.hover;
+        },
+        updateState() {
+            if (this.type === 'dataset') {
+                this.$store.dispatch('setDataset', this.value);
+            }
         },
     },
-}
+};
 </script>

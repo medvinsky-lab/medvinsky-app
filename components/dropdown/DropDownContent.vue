@@ -1,5 +1,8 @@
 <template>
-    <div v-if="active" class="bg-white w-full text-left rounded mt-1">
+    <div
+        v-if="active"
+        class="bg-white w-full text-left rounded mt-1 ring-2 ring-gray-200"
+    >
         <slot></slot>
     </div>
 </template>

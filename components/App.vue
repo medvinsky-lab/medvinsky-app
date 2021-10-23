@@ -49,7 +49,7 @@
         <main-card class="col-span-4">
             <selector-row></selector-row>
             <div class="bg-white p-2 border-radius-2">
-                <p>This will be the data content</p>
+                <p>This is the {{ activateDataset }} dataset</p>
             </div>
         </main-card>
         <main-card class="col-span-4 flex">
@@ -60,6 +60,16 @@
         </main-card>
     </div>
 </template>
+
+<script>
+export default {
+    computed: {
+        activateDataset() {
+            return this.$store.getters.activeDataset;
+        },
+    },
+};
+</script>
 
 <style>
 body {
