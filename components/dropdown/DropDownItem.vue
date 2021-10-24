@@ -37,6 +37,8 @@ export default {
         updateState() {
             if (this.type === 'dataset') {
                 this.$store.dispatch('setDataset', this.value);
+                this.$store.dispatch('setLigand', null);
+                this.$store.dispatch('setReceptor', null);
             } else if (this.type === 'ligand') {
                 this.$store.dispatch('setLigand', this.value);
             } else if (this.type === 'receptor') {
