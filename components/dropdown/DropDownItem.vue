@@ -37,8 +37,12 @@ export default {
         updateState() {
             if (this.type === 'dataset') {
                 this.$store.dispatch('setDataset', this.value);
-                this.$emit('item-click');
+            } else if (this.type === 'ligand') {
+                this.$store.dispatch('setLigand', this.value);
+            } else if (this.type === 'receptor') {
+                this.$store.dispatch('setReceptor', this.value);
             }
+            this.$emit('item-click');
         },
     },
 };

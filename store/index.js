@@ -8,6 +8,12 @@ export const mutations = {
     setDataset(state, text) {
         state.dataset = text;
     },
+    setLignad(state, text) {
+        state.receptor = text;
+    },
+    setReceptor(state, text) {
+        state.receptor = text;
+    },
 };
 
 export const getters = {
@@ -19,5 +25,11 @@ export const getters = {
 export const actions = {
     setDataset({ commit }, text) {
         commit('setDataset', text);
+    },
+    setLignad({ commit }, text) {
+        commit('setLignad', text);
+    },
+    setReceptor({ commit }, text) {
+        commit('setReceptor', text);
     },
 };
