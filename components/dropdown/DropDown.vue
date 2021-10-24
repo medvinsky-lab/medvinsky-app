@@ -1,5 +1,5 @@
 <template>
-    <div class="z-10">
+    <div class="z-10" @mouseleave="away">
         <p class="mb-1 text-sm font-bold">
             {{ label }}
         </p>
@@ -61,17 +61,20 @@ export default {
         toggle() {
             this.active = !this.active;
         },
+        away() {
+            this.active = false;
+        },
         fieldtext() {
-            if (this.label === 'Dataset') {
+            if (this.type === 'dataset') {
                 return this.activateDataset;
-            } else if (this.label === 'Ligand') {
+            } else if (this.type === 'ligand') {
                 const ligand = this.activateLigand;
                 if (ligand === null) {
                     return 'Select ligand population';
                 } else {
                     return ligand;
                 }
-            } else if (this.label === 'Receptor') {
+            } else if (this.type === 'receptor') {
                 const receptor = this.activateReceptor;
                 if (receptor === null) {
                     return 'Select receptor population';
