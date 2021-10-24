@@ -1,8 +1,16 @@
 <template>
     <div class="grid grid-cols-3 gap-2 mb-2 h-16">
-        <drop-down label="Dataset" :items="datasets"></drop-down>
-        <drop-down label="Ligand" :items="ligandRegions"></drop-down>
-        <drop-down label="Receptor" :items="receptorRegions"></drop-down>
+        <drop-down label="Dataset" type="dataset" :items="datasets"></drop-down>
+        <drop-down
+            label="Ligand"
+            type="ligand"
+            :items="ligandRegions"
+        ></drop-down>
+        <drop-down
+            label="Receptor"
+            type="receptor"
+            :items="receptorRegions"
+        ></drop-down>
     </div>
 </template>
 
@@ -11,34 +19,26 @@ export default {
     data() {
         return {
             datasets: [
-                { type: 'dataset', id: 'cs13', name: 'LCM-Seq CS13' },
-                { type: 'dataset', id: 'cs14', name: 'LCM-Seq CS14' },
-                { type: 'dataset', id: 'cs15', name: 'LCM-Seq CS15' },
-                { type: 'dataset', id: 'umap', name: 'UMAP CS13-CS15' },
+                { id: 'cs13', name: 'LCM-Seq CS13' },
+                { id: 'cs14', name: 'LCM-Seq CS14' },
+                { id: 'cs15', name: 'LCM-Seq CS15' },
+                { id: 'umap', name: 'UMAP CS13-CS15' },
             ],
             ligandRegions: [
-                { type: 'ligand', id: 'do', name: 'Dorsal outer' },
-                { type: 'ligand', id: 'di', name: 'Dorsal inner' },
-                { type: 'ligand', id: 'vo', name: 'Ventral outer' },
-                { type: 'ligand', id: 'vi', name: 'Ventral inner' },
-                { type: 'ligand', id: 'geo', name: 'Gonadal epithelium outer' },
-                { type: 'ligand', id: 'gei', name: 'Gonadal epithelium inner' },
+                { id: 'do', name: 'Dorsal outer' },
+                { id: 'di', name: 'Dorsal inner' },
+                { id: 'vo', name: 'Ventral outer' },
+                { id: 'vi', name: 'Ventral inner' },
+                { id: 'geo', name: 'Gonadal epithelium outer' },
+                { id: 'gei', name: 'Gonadal epithelium inner' },
             ],
             receptorRegions: [
-                { type: 'receptor', id: 'do', name: 'Dorsal outer' },
-                { type: 'receptor', id: 'di', name: 'Dorsal inner' },
-                { type: 'receptor', id: 'vo', name: 'Ventral outer' },
-                { type: 'receptor', id: 'vi', name: 'Ventral inner' },
-                {
-                    type: 'receptor',
-                    id: 'geo',
-                    name: 'Gonadal epithelium outer',
-                },
-                {
-                    type: 'receptor',
-                    id: 'gei',
-                    name: 'Gonadal epithelium inner',
-                },
+                { id: 'do', name: 'Dorsal outer' },
+                { id: 'di', name: 'Dorsal inner' },
+                { id: 'vo', name: 'Ventral outer' },
+                { id: 'vi', name: 'Ventral inner' },
+                { id: 'geo', name: 'Gonadal epithelium outer' },
+                { id: 'gei', name: 'Gonadal epithelium inner' },
             ],
         };
     },

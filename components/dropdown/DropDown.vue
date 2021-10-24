@@ -18,7 +18,7 @@
             <drop-down-item
                 v-for="item in items"
                 :key="item.id"
-                :type="item.type"
+                :type="type"
                 :value="item.name"
                 @item-click="toggle"
                 >{{ item.name }}
@@ -36,6 +36,10 @@ export default {
         },
         items: {
             type: Array,
+            required: true,
+        },
+        type: {
+            type: String,
             required: true,
         },
     },
