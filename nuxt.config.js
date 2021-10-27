@@ -1,6 +1,9 @@
 export default {
     // Target: https://go.nuxtjs.dev/config-target
     target: 'static',
+    router: {
+        base: '/medvinsky-app/',
+    },
 
     // Global page headers: https://go.nuxtjs.dev/config-head
     head: {
@@ -31,7 +34,11 @@ export default {
 
     // Auto import components: https://go.nuxtjs.dev/config-components
     components: {
-        dirs: ['~/components', '~/components/dropdown'],
+        dirs: [
+            '~/components',
+            '~/components/dropdown',
+            '~/components/datasets',
+        ],
     },
 
     // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
@@ -42,11 +49,20 @@ export default {
         '@nuxtjs/stylelint-module',
         // https://go.nuxtjs.dev/tailwindcss
         '@nuxtjs/tailwindcss',
+        // https://google-fonts.nuxtjs.org/
+        '@nuxtjs/google-fonts',
     ],
+
+    // Google fonts
+    googleFonts: {
+        families: {
+            Roboto: true,
+        },
+    },
 
     // Modules: https://go.nuxtjs.dev/config-modules
     modules: [],
 
     // Build Configuration: https://go.nuxtjs.dev/config-build
     build: {},
-}
+};

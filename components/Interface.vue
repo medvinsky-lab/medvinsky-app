@@ -48,9 +48,7 @@
         </main-card>
         <main-card class="col-span-4">
             <selector-row></selector-row>
-            <div class="bg-white p-2 border-radius-2">
-                <p>This is the {{ activateDataset }} dataset</p>
-            </div>
+            <cs13 v-if="activeDataset === 'LCM-Seq CS13'"></cs13>
         </main-card>
         <main-card class="col-span-4 flex">
             <p class="m-auto">This will be the plot content</p>
@@ -64,7 +62,7 @@
 <script>
 export default {
     computed: {
-        activateDataset() {
+        activeDataset() {
             return this.$store.getters.activeDataset;
         },
     },
