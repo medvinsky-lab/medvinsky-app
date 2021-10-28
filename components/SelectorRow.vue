@@ -1,15 +1,25 @@
 <template>
-    <div class="grid grid-cols-3 gap-2 mb-2 h-16">
-        <drop-down label="Dataset" type="dataset" :items="datasets"></drop-down>
+    <div class="grid grid-cols-3 gap-2 mb-1 h-16">
+        <drop-down
+            label="Dataset"
+            desc="LCM-Seq CS13"
+            type="dataset"
+            :items="datasets" 
+            class="z-40"
+        ></drop-down>
         <drop-down
             label="Ligand"
+            desc="Select ligand"
             type="ligand"
             :items="ligandRegions"
+            class="z-40"
         ></drop-down>
         <drop-down
             label="Receptor"
+            desc="Select receptor"
             type="receptor"
             :items="receptorRegions"
+            class="z-40"
         ></drop-down>
     </div>
 </template>
