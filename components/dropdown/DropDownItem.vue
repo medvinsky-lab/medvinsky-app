@@ -44,7 +44,7 @@ export default {
             } else if (this.type === 'receptor') {
                 this.$store.dispatch('setReceptor', this.value);
             }
-            this.$emit('item-click');
+            this.$emit('item-click', this.value);
         },
     },
 };

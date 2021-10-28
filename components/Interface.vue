@@ -1,5 +1,5 @@
 <template>
-    <div class="grid grid-cols-8 gap-2">
+    <div class="grid grid-cols-8 gap-2 m-2">
         <main-card class="col-span-4">
             <div class="h-24">
                 <h1>
@@ -70,9 +70,6 @@ export default {
 </script>
 
 <style>
-body {
-    margin: 1rem 6rem;
-}
 h1 {
     @apply text-3xl font-bold;
 }
