@@ -2,8 +2,8 @@
     <button
         :class="{ 'bg-gray-100': hover }"
         class="w-full text-left"
-        @mouseenter="hoverToggle"
-        @mouseleave="hoverToggle"
+        @mouseenter="toggleIn"
+        @mouseleave="toggleOut"
         @click="$emit('item-click', label)"
     >
         <p class="p-2">
@@ -20,15 +20,19 @@ export default {
             default: 'label',
         },
     },
-    emits: ['item-click'],
+    emits: ['item-click', 'item-hover'],
     data() {
         return {
             hover: false,
         };
     },
     methods: {
-        hoverToggle() {
-            this.hover = !this.hover;
+        toggleIn() {
+            this.hover = true;
+            this.$emit('item-hover', this.label);
+        },
+        toggleOut() {
+            this.hover = false;
         },
     },
 };

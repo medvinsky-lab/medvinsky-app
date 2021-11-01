@@ -20,6 +20,7 @@
                     v-for="item in items"
                     :key="item.id"
                     :label="item.label"
+                    @item-hover="propagate"
                     @item-click="dispatch"
                 ></drop-down-item>
             </div>
@@ -43,9 +44,11 @@ export default {
             required: true,
         },
     },
+    emits: ['hover'],
     data() {
         return {
             active: false,
+            region: null,
         };
     },
     methods: {
@@ -54,6 +57,9 @@ export default {
         },
         close() {
             this.active = false;
+        },
+        propagate(value) {
+            this.$emit('hover', value);
         },
         dispatch(value) {
             const label = this.label.toLowerCase();

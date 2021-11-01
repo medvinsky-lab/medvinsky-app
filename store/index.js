@@ -1,18 +1,18 @@
 export const state = () => ({
     dataset: 'LCM-Seq CS13',
-    receptor: null,
     ligand: null,
+    receptor: null,
 });
 
 export const mutations = {
-    setDataset(state, text) {
-        state.dataset = text;
+    setDataset(state, value) {
+        state.dataset = value;
     },
-    setLigand(state, text) {
-        state.ligand = text;
+    setLigand(state, value) {
+        state.ligand = value;
     },
-    setReceptor(state, text) {
-        state.receptor = text;
+    setReceptor(state, value) {
+        state.receptor = value;
     },
 };
 

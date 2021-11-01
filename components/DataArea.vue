@@ -13,16 +13,22 @@
                 label="Ligand"
                 text="Select ligand population"
                 :items="ligands"
+                @hover="propagateLigand"
             ></drop-down>
             <drop-down
                 class="h-16"
                 label="Receptor"
                 text="Select receptor population"
                 :items="receptors"
+                @hover="propagateReceptor"
             ></drop-down>
         </div>
         <div class="col-span-2">
-            <cs-13 v-if="activeDataset === 'LCM-Seq CS13'"></cs-13>
+            <cs-13
+                v-if="activeDataset === 'LCM-Seq CS13'"
+                :ligand="ligand"
+                :receptor="receptor"
+            ></cs-13>
         </div>
     </main-card>
 </template>
@@ -53,11 +59,21 @@ export default {
                 { id: 'geo', label: 'Gonadal epithelium outer' },
                 { id: 'gei', label: 'Gonadal epithelium inner' },
             ],
+            ligand: null,
+            receptor: null,
         };
     },
     computed: {
         activeDataset() {
             return this.$store.getters.activeDataset;
+        },
+    },
+    methods: {
+        propagateLigand(value) {
+            this.ligand = value;
+        },
+        propagateReceptor(value) {
+            this.receptor = value;
         },
     },
 };
