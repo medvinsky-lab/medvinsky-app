@@ -29,13 +29,13 @@ export const getters = {
 };
 
 export const actions = {
-    setDataset({ commit }, text) {
-        commit('setDataset', text);
+    setDataset({ commit }, value) {
+        commit('setDataset', value);
     },
-    setLigand({ commit }, text) {
-        commit('setLigand', text);
+    setLigand({ commit }, value) {
+        commit('setLigand', value);
     },
-    setReceptor({ commit }, text) {
-        commit('setReceptor', text);
+    setReceptor({ commit }, value) {
+        commit('setReceptor', value);
     },
 };

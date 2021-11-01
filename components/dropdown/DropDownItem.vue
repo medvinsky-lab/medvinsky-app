@@ -4,10 +4,10 @@
         class="w-full text-left"
         @mouseenter="hoverToggle"
         @mouseleave="hoverToggle"
-        @click="updateState"
+        @click="$emit('item-click', label)"
     >
         <p class="p-2">
-            <slot></slot>
+            {{ label }}
         </p>
     </button>
 </template>
@@ -15,13 +15,9 @@
 <script>
 export default {
     props: {
-        type: {
+        label: {
             type: String,
-            required: true,
-        },
-        value: {
-            type: String,
-            required: true,
+            default: 'label',
         },
     },
     emits: ['item-click'],
@@ -33,18 +29,6 @@ export default {
     methods: {
         hoverToggle() {
             this.hover = !this.hover;
-        },
-        updateState() {
-            if (this.type === 'dataset') {
-                this.$store.dispatch('setDataset', this.value);
-                this.$store.dispatch('setLigand', null);
-                this.$store.dispatch('setReceptor', null);
-            } else if (this.type === 'ligand') {
-                this.$store.dispatch('setLigand', this.value);
-            } else if (this.type === 'receptor') {
-                this.$store.dispatch('setReceptor', this.value);
-            }
-            this.$emit('item-click', this.value);
         },
     },
 };

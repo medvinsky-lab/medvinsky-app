@@ -87,27 +87,27 @@
                         opacity: 0.5;
                     }
                     #dorsal-outer {
-                        fill: #93C5FD;
-                        stroke: #2563EB;
+                        fill: #93c5fd;
+                        stroke: #2563eb;
                     }
                     #dorsal-inner {
-                        fill: #6EE7B7;
-                        stroke: #10B981;
+                        fill: #6ee7b7;
+                        stroke: #10b981;
                     }
                     #ventral-outer {
-                        fill: #FDE68A;
-                        stroke: #F59E0B;
+                        fill: #fde68a;
+                        stroke: #f59e0b;
                     }
                     #ventral-inner {
-                        fill: #FCA5A5;
-                        stroke: #EF4444;
+                        fill: #fca5a5;
+                        stroke: #ef4444;
                     }
                     #ge-outer {
-                        fill: #D1D5DB;
+                        fill: #d1d5db;
                         stroke: #374151;
                     }
                     #ge-inner {
-                        fill: #9CA3AF;
+                        fill: #9ca3af;
                         stroke: #374151;
                     }
                 </style>
