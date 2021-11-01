@@ -20,7 +20,8 @@
                     v-for="item in items"
                     :key="item.id"
                     :label="item.label"
-                    @item-hover="propagate"
+                    @item-enter="propagate"
+                    @item-leave="propagate"
                     @item-click="dispatch"
                 ></drop-down-item>
             </div>
@@ -44,11 +45,10 @@ export default {
             required: true,
         },
     },
-    emits: ['hover'],
+    emits: ['hover', 'dispatch'],
     data() {
         return {
             active: false,
-            region: null,
         };
     },
     methods: {
@@ -75,6 +75,7 @@ export default {
                 this.$store.dispatch('setReceptor', value);
             }
             this.close();
+            this.$emit('dispatch');
         },
         getDescription() {
             const label = this.label.toLowerCase();

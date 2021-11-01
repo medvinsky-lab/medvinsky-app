@@ -20,7 +20,7 @@ export default {
             default: 'label',
         },
     },
-    emits: ['item-click', 'item-hover'],
+    emits: ['item-click', 'item-enter', 'item-leave'],
     data() {
         return {
             hover: false,
@@ -29,10 +29,11 @@ export default {
     methods: {
         toggleIn() {
             this.hover = true;
-            this.$emit('item-hover', this.label);
+            this.$emit('item-enter', this.label);
         },
         toggleOut() {
             this.hover = false;
+            this.$emit('item-leave', null);
         },
     },
 };

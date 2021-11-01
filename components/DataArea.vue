@@ -6,6 +6,7 @@
                 label="Dataset"
                 text="Select dataset"
                 :items="datasets"
+                @dispatch="reset"
             >
             </drop-down>
             <drop-down
@@ -69,6 +70,10 @@ export default {
         },
     },
     methods: {
+        reset() {
+            this.ligand = null;
+            this.receptor = null;
+        },
         propagateLigand(value) {
             this.ligand = value;
         },
