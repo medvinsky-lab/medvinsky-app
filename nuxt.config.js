@@ -49,8 +49,12 @@ export default {
         '@nuxtjs/stylelint-module',
         // https://go.nuxtjs.dev/tailwindcss
         '@nuxtjs/tailwindcss',
+        // https://nuxtjs.org/docs/directory-structure/content/
+        '@nuxt/content',
         // https://google-fonts.nuxtjs.org/
         '@nuxtjs/google-fonts',
+        // https://github.com/richardeschloss/nuxt-highcharts
+        'nuxt-highcharts',
     ],
 
     // Google fonts
