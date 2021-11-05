@@ -1,7 +1,7 @@
 <template>
     <div>
         <main-card class="h-full">
-            <div class="h-full w-full bg-white flex">
+            <div class="h-full w-full bg-white flex p-2">
                 <highchart
                     class="w-full h-4/5 m-auto"
                     :options="chartOptions"
@@ -19,6 +19,7 @@ export default {
             return {
                 chart: {
                     type: 'heatmap',
+                    marginTop: 40,
                 },
                 title: {
                     text: null,
@@ -57,6 +58,7 @@ export default {
                     layout: 'vertical',
                     margin: 0,
                     verticalAlign: 'top',
+                    y: 25,
                 },
                 series: [
                     {

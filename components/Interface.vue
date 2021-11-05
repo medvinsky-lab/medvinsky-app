@@ -20,7 +20,7 @@ export default {
 
 <style>
 body {
-    @apply mx-12 my-4;
+    @apply mx-16 my-4;
 }
 h1 {
     @apply text-3xl font-bold;
