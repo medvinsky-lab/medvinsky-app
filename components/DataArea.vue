@@ -1,6 +1,6 @@
 <template>
     <main-card class="grid grid-cols-2">
-        <div class="col-span-2 grid grid-cols-3 gap-2">
+        <div class="col-span-2 grid grid-cols-3 gap-2 mb-3">
             <drop-down
                 class="h-16"
                 label="Dataset"
@@ -24,10 +24,10 @@
                 @hover="propagateReceptor"
             ></drop-down>
         </div>
-        <div class="col-span-2">
+        <div class="col-span-2 h-full">
             <cs-13
-                class="h-full flex m-auto"
                 v-if="activeDataset === 'LCM-Seq CS13'"
+                class="h-full flex m-auto"
                 :ligand="ligand"
                 :receptor="receptor"
             ></cs-13>
