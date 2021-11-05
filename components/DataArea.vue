@@ -1,5 +1,5 @@
 <template>
-    <main-card class="grid grid-cols-2 gap-2">
+    <main-card class="grid grid-cols-2">
         <div class="col-span-2 grid grid-cols-3 gap-2">
             <drop-down
                 class="h-16"
@@ -26,6 +26,7 @@
         </div>
         <div class="col-span-2">
             <cs-13
+                class="h-full flex m-auto"
                 v-if="activeDataset === 'LCM-Seq CS13'"
                 :ligand="ligand"
                 :receptor="receptor"
