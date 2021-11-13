@@ -36,7 +36,7 @@ export default {
     components: {
         dirs: [
             '~/components',
-            '~/components/dropdown',
+            '~/components/ui',
             '~/components/datasets',
         ],
     },
