@@ -1,5 +1,5 @@
 <template>
-    <Interface />
+  <interface />
 </template>
 
 <script>

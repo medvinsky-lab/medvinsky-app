@@ -36,7 +36,7 @@ export default {
     components: {
         dirs: [
             '~/components',
-            '~/components/dropdown',
+            '~/components/ui',
             '~/components/datasets',
         ],
     },
@@ -51,18 +51,9 @@ export default {
         '@nuxtjs/tailwindcss',
         // https://nuxtjs.org/docs/directory-structure/content/
         '@nuxt/content',
-        // https://google-fonts.nuxtjs.org/
-        '@nuxtjs/google-fonts',
         // https://github.com/richardeschloss/nuxt-highcharts
         'nuxt-highcharts',
     ],
-
-    // Google fonts
-    googleFonts: {
-        families: {
-            Roboto: true,
-        },
-    },
 
     // Modules: https://go.nuxtjs.dev/config-modules
     modules: [],
