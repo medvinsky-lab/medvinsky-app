@@ -1,30 +1,37 @@
 export const state = () => ({
-    dataset: 'LCM-Seq CS13',
-    ligand: null,
-    receptor: null,
+    activeDataset: 'LCM-Seq CS13',
+    activeLigand: null,
+    activeReceptor: null,
+    activePlot: 'heatmap'
 });
 
 export const mutations = {
     setDataset(state, value) {
-        state.dataset = value;
+        state.activeDataset = value;
     },
     setLigand(state, value) {
-        state.ligand = value;
+        state.activeLigand = value;
     },
     setReceptor(state, value) {
-        state.receptor = value;
+        state.activeReceptor = value;
+    },
+    setPlot(state, value) {
+        state.activePlot = value;
     },
 };
 
 export const getters = {
     activeDataset: (state) => {
-        return state.dataset;
+        return state.activeDataset;
     },
     activeLigand: (state) => {
-        return state.ligand;
+        return state.activeLigand;
     },
     activeReceptor: (state) => {
-        return state.receptor;
+        return state.activeReceptor;
+    },
+    activePlot: (state) => {
+        return state.activePlot;
     },
 };
 
@@ -37,5 +44,8 @@ export const actions = {
     },
     setReceptor({ commit }, value) {
         commit('setReceptor', value);
+    },
+    setPlot({ commit }, value) {
+        commit('setPlot', value);
     },
 };
