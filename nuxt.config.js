@@ -37,7 +37,8 @@ export default {
         dirs: [
             '~/components',
             '~/components/ui',
-            '~/components/datasets',
+            '~/components/visuals',
+            '~/components/plots'
         ],
     },
 
