@@ -1,11 +1,9 @@
 <template>
-  <div class="h-full w-full bg-white flex p-2">
-    <highchart
-      class="w-full h-4/5 m-auto"
-      :options="chartOptions"
-      :modules="['heatmap']"
-    />
-  </div>
+  <highchart
+    class="flex-grow rounded"
+    :options="chartOptions"
+    :modules="['heatmap']"
+  />
 </template>
 
 <script>
@@ -16,7 +14,7 @@ export default {
       return {
         chart: {
           type: 'heatmap',
-          marginTop: 40,
+          margin: 70,
         },
         title: {
           text: null,
@@ -25,12 +23,20 @@ export default {
           categories: this.xAxis,
           gridLineWidth: 0,
           lineWidth: 0,
+          labels: {
+            rotation: 0,
+            align: 'center',
+            enabled: false,
+          },
         },
         yAxis: {
           categories: this.yAxis,
           gridLineWidth: 0,
           title: null,
           reversed: true,
+          labels: {
+            enabled: false,
+          },
         },
         colorAxis: {
           minColor: '#fff7bc',
@@ -53,6 +59,7 @@ export default {
           margin: 0,
           verticalAlign: 'top',
           y: 25,
+          enabled: false,
         },
         series: [
           {

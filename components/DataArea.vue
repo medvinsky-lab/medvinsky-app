@@ -24,7 +24,7 @@
     <div class="col-span-2 h-full">
       <cs-13
         v-if="activeDataset === 'LCM-Seq CS13'"
-        class="h-full flex m-auto"
+        class="flex m-auto"
         :ligand="ligand"
         :receptor="receptor"
       ></cs-13>

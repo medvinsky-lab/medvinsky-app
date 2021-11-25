@@ -1,9 +1,11 @@
 <template>
-  <div>
-    <main-card class="h-full">
-      <heatmap v-if="activePlot === 'heatmap'" :plot-data="plotData"></heatmap>
-    </main-card>
-  </div>
+  <main-card class="flex flex-col">
+    <div class="mb-2 flex flex-row space-x-2">
+      <standard-button label="Heatmap"></standard-button>
+      <standard-button label="Interactions"></standard-button>
+    </div>
+    <heatmap v-if="activePlot === 'heatmap'" :plot-data="plotData"></heatmap>
+  </main-card>
 </template>
 
 <script>
