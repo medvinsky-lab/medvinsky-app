@@ -1,9 +1,9 @@
 <template>
-  <div class="z-50 h-16">
+  <div class="z-50">
     <p class="text-sm font-bold mb-1">{{ label }}</p>
-    <div @mouseleave="close">
-      <button class="bg-white p-2 w-full text-left rounded" @click="toggle">
-        <div class="w-full flex justify-between">
+    <div>
+      <button class="bg-white w-48 py-1 px-2 text-left rounded" @click="toggle">
+        <div class="flex justify-between">
           <p class="truncate">{{ getDescription() }}</p>
           <i v-if="!active" class="gg-chevron-down"></i>
           <i v-if="active" class="gg-chevron-up"></i>
@@ -11,7 +11,7 @@
       </button>
       <div
         v-if="active"
-        class="bg-white w-full rounded mt-1 ring-2 ring-gray-200"
+        class="bg-white w-60 rounded mt-2 ring-2 ring-gray-200 absolute"
       >
         <drop-down-item
           v-for="item in items"
@@ -33,7 +33,7 @@ export default {
       type: String,
       default: 'Label',
     },
-    text: {
+    description: {
       type: String,
       default: 'Description',
     },
@@ -83,7 +83,7 @@ export default {
       if (label === 'ligand') {
         const activeLigand = this.$store.getters.activeLigand;
         if (activeLigand === null) {
-          return this.text;
+          return this.description;
         } else {
           return activeLigand;
         }
@@ -91,7 +91,7 @@ export default {
       if (label === 'receptor') {
         const activeReceptor = this.$store.getters.activeReceptor;
         if (activeReceptor === null) {
-          return this.text;
+          return this.description;
         } else {
           return activeReceptor;
         }
