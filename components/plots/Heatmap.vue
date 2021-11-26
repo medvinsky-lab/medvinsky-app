@@ -26,6 +26,7 @@ export default {
           labels: {
             rotation: 0,
             enabled: true,
+            align: 'center',
             formatter() {
               return this.value.replace(/\s/g, '</br>');
             },
