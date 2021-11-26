@@ -14,7 +14,7 @@ export default {
       return {
         chart: {
           type: 'heatmap',
-          margin: 70,
+          margin: 100,
         },
         title: {
           text: null,
@@ -25,8 +25,10 @@ export default {
           lineWidth: 0,
           labels: {
             rotation: 0,
-            align: 'center',
-            enabled: false,
+            enabled: true,
+            formatter() {
+              return this.value.replace(/\s/g, '</br>');
+            },
           },
         },
         yAxis: {
@@ -35,7 +37,10 @@ export default {
           title: null,
           reversed: true,
           labels: {
-            enabled: false,
+            enabled: true,
+            formatter() {
+              return this.value.replace(/\s/g, '</br>');
+            },
           },
         },
         colorAxis: {
