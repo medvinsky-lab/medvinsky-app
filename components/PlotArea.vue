@@ -3,10 +3,12 @@
     <div class="mb-2 flex flex-row space-x-2 h-12 flex-wrap content-end">
       <standard-button
         label="Heatmap"
+        :active="activePlot === 'heatmap'"
         @click="setPlot('heatmap')"
       ></standard-button>
       <standard-button
         label="Interactions"
+        :active="activePlot === 'interaction'"
         @click="setPlot('interaction')"
       ></standard-button>
     </div>
