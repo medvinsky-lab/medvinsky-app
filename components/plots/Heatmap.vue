@@ -14,7 +14,7 @@ export default {
       return {
         chart: {
           type: 'heatmap',
-          margin: 70,
+          margin: 100,
         },
         title: {
           text: null,
@@ -25,8 +25,11 @@ export default {
           lineWidth: 0,
           labels: {
             rotation: 0,
+            enabled: true,
             align: 'center',
-            enabled: false,
+            formatter() {
+              return this.value.replace(/\s/g, '</br>');
+            },
           },
         },
         yAxis: {
@@ -35,12 +38,21 @@ export default {
           title: null,
           reversed: true,
           labels: {
-            enabled: false,
+            enabled: true,
+            formatter() {
+              return this.value.replace(/\s/g, '</br>');
+            },
           },
         },
         colorAxis: {
-          minColor: '#fff7bc',
-          maxColor: '#d95f0e',
+          stops: [
+            [0, '#fef0d9'],
+            [0.2, '#fdd49e'],
+            [0.4, '#fdbb84'],
+            [0.6, '#fc8d59'],
+            [0.8, '#e34a33'],
+            [1, '#b30000'],
+          ],
         },
         tooltip: {
           formatter() {
@@ -64,8 +76,9 @@ export default {
         series: [
           {
             type: 'heatmap',
-            borderWidth: 2,
+            borderWidth: 3,
             borderColor: 'white',
+            borderRadius: 10,
             data: this.series,
             dataLabels: {
               enabled: true,

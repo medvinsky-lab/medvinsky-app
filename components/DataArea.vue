@@ -1,30 +1,28 @@
 <template>
-  <main-card class="grid grid-cols-2">
-    <div class="col-span-2 grid grid-cols-3 gap-2 mb-3">
+  <main-card class="flex flex-col">
+    <div class="flex flex-row flex-wrap h-12 justify-between content-end mb-2">
       <drop-down
         label="Dataset"
-        text="Select dataset"
+        description="Select dataset"
         :items="datasets"
         @dispatch="reset"
-      >
-      </drop-down>
+      ></drop-down>
       <drop-down
         label="Ligand"
-        text="Select ligand population"
+        description="Select ligand region"
         :items="ligands"
         @hover="propagateLigand"
       ></drop-down>
       <drop-down
         label="Receptor"
-        text="Select receptor population"
+        description="Select receptor region"
         :items="receptors"
         @hover="propagateReceptor"
       ></drop-down>
     </div>
-    <div class="col-span-2 h-full">
+    <div>
       <cs-13
         v-if="activeDataset === 'LCM-Seq CS13'"
-        class="flex m-auto"
         :ligand="ligand"
         :receptor="receptor"
       ></cs-13>

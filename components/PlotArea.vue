@@ -1,10 +1,19 @@
 <template>
   <main-card class="flex flex-col">
-    <div class="mb-2 flex flex-row space-x-2">
-      <standard-button label="Heatmap"></standard-button>
-      <standard-button label="Interactions"></standard-button>
+    <div class="mb-2 flex flex-row space-x-2 h-12 flex-wrap content-end">
+      <standard-button
+        label="Heatmap"
+        :active="activePlot === 'heatmap'"
+        @click="setPlot('heatmap')"
+      ></standard-button>
+      <standard-button
+        label="Interactions"
+        :active="activePlot === 'interaction'"
+        @click="setPlot('interaction')"
+      ></standard-button>
     </div>
     <heatmap v-if="activePlot === 'heatmap'" :plot-data="plotData"></heatmap>
+    <interaction-plot v-if="activePlot === 'interaction'"></interaction-plot>
   </main-card>
 </template>
 
@@ -35,6 +44,11 @@ export default {
   },
   watch: {
     activeDataset: '$fetch',
+  },
+  methods: {
+    setPlot(value) {
+      this.$store.dispatch('setPlot', value);
+    },
   },
 };
 </script>
