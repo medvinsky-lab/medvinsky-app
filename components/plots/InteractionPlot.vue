@@ -1,7 +1,5 @@
 <template>
-  <div class="flex-grow flex flex-col">
-    <div id="chart" ref="chart" class="bg-white flex-grow rounded"></div>
-  </div>
+  <div id="chart" ref="chart" class="w-full h-full p-10"></div>
 </template>
 
 <script>
@@ -14,14 +12,14 @@ export default {
       .append('svg')
       .attr('width', '100%')
       .attr('height', '100%')
-      .attr('viewBox', `0 0 620 578`);
+      .attr('viewBox', '0 0 590.5 543.578');
 
     svg
       .append('circle')
       .attr('cx', 50)
       .attr('cy', 50)
       .attr('r', 50)
-      .attr('stroke-width', 1);
+      .attr('stroke-width', 0);
   },
   data: () => ({
     chartData: [40, 60, 80, 100, 70, 120, 100, 60, 70, 150, 120, 140],
