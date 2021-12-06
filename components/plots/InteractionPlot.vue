@@ -1,5 +1,9 @@
 <template>
-  <div id="chart" ref="chart" class="w-full h-full p-10"></div>
+  <div
+    id="chart"
+    ref="chart"
+    class="m-auto w-full overflow-auto container"
+  ></div>
 </template>
 
 <script>
@@ -10,16 +14,25 @@ export default {
     const svg = d3
       .select('#chart')
       .append('svg')
-      .attr('width', '100%')
-      .attr('height', '100%')
-      .attr('viewBox', '0 0 590.5 543.578');
+      .attr('height', '620')
+      .attr('width', '100%');
 
-    svg
-      .append('circle')
-      .attr('cx', 50)
-      .attr('cy', 50)
-      .attr('r', 50)
-      .attr('stroke-width', 0);
+    let yStart = 10;
+    const boxWidth = 150;
+    const boxHeight = 25;
+
+    for (let i = 0; i < 20; i++) {
+      svg
+        .append('rect')
+        .attr('x', 20)
+        .attr('y', yStart)
+        .attr('width', boxWidth)
+        .attr('height', boxHeight)
+        .attr('rx', 5)
+        .attr('ry', 5);
+
+      yStart = yStart + boxHeight + 5;
+    }
   },
   data: () => ({
     chartData: [40, 60, 80, 100, 70, 120, 100, 60, 70, 150, 120, 140],
@@ -28,3 +41,9 @@ export default {
   }),
 };
 </script>
+
+<style scoped>
+.container {
+  height: 500px;
+}
+</style>
