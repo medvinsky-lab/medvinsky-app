@@ -1,6 +1,6 @@
 <template>
   <main-card class="flex flex-col">
-    <div class="flex flex-row flex-wrap h-12 justify-between content-end mb-2">
+    <div class="flex flex-row space-x-2 h-16 w-full">
       <drop-down
         label="Dataset"
         description="Select dataset"

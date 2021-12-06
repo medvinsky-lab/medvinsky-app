@@ -1,8 +1,8 @@
 <template>
-  <div class="z-50">
+  <div class="w-full">
     <p class="text-sm font-bold mb-1">{{ label }}</p>
-    <div>
-      <button class="bg-white w-48 py-1 px-2 text-left rounded" @click="toggle">
+    <div class="flex flex-col w-full" @mouseleave="close">
+      <button class="bg-white py-1 px-2 text-left rounded" @click="toggle">
         <div class="flex justify-between">
           <p class="truncate">{{ getDescription() }}</p>
           <i v-if="!active" class="gg-chevron-down"></i>
@@ -11,7 +11,7 @@
       </button>
       <div
         v-if="active"
-        class="bg-white w-60 rounded mt-2 ring-2 ring-gray-200 absolute"
+        class="bg-white rounded mt-2 ring-2 ring-gray-200 z-50"
       >
         <drop-down-item
           v-for="item in items"
