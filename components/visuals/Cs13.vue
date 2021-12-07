@@ -1,5 +1,5 @@
 <template>
-  <div class="p-20 bg-white rounded">
+  <div class="p-14 bg-white rounded">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 453.45 411.77">
       <g id="Lager_2" data-name="Lager 2">
         <g id="Lager_1-2" data-name="Lager 1">

@@ -1,9 +1,5 @@
 <template>
-  <div
-    id="chart"
-    ref="chart"
-    class="m-auto w-full overflow-auto container"
-  ></div>
+  <div id="chart" class="bg-white flex items-center flex-grow rounded"></div>
 </template>
 
 <script>
@@ -14,36 +10,21 @@ export default {
     const svg = d3
       .select('#chart')
       .append('svg')
-      .attr('height', '620')
-      .attr('width', '100%');
+      .attr('width', '100%')
+      .attr('height', '100%');
 
-    let yStart = 10;
-    const boxWidth = 150;
-    const boxHeight = 25;
+    const svgWidth = parseFloat(svg.style('width'));
+    const svgHeight = parseFloat(svg.style('height'));
 
-    for (let i = 0; i < 20; i++) {
-      svg
-        .append('rect')
-        .attr('x', 20)
-        .attr('y', yStart)
-        .attr('width', boxWidth)
-        .attr('height', boxHeight)
-        .attr('rx', 5)
-        .attr('ry', 5);
-
-      yStart = yStart + boxHeight + 5;
-    }
+    svg
+      .append('rect')
+      .attr('x', 10)
+      .attr('y', 10)
+      .attr('width', svgWidth - 20)
+      .attr('height', svgHeight - 20);
   },
   data: () => ({
-    chartData: [40, 60, 80, 100, 70, 120, 100, 60, 70, 150, 120, 140],
-    barWidth: 40,
-    barOffset: 10,
+    nRects: 20,
   }),
 };
 </script>
-
-<style scoped>
-.container {
-  height: 500px;
-}
-</style>

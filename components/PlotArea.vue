@@ -12,7 +12,7 @@
         @click="setPlot('interaction')"
       ></standard-button>
     </div>
-    <div class="bg-white rounded flex flex-grow">
+    <div class="flex flex-grow">
       <heatmap v-if="activePlot === 'heatmap'" :plot-data="plotData"></heatmap>
       <interaction-plot v-if="activePlot === 'interaction'"></interaction-plot>
     </div>
