@@ -70,8 +70,9 @@ export default {
           layout: 'vertical',
           margin: 0,
           verticalAlign: 'top',
-          y: 25,
-          enabled: false,
+          y: 85,
+          x: -20,
+          enabled: true,
         },
         series: [
           {
