@@ -1,86 +1,90 @@
 <template>
-  <div id="chart" class="bg-white flex items-center flex-grow rounded"></div>
+  <div id="cy" ref="cy" class="flex-grow bg-white rounded"></div>
 </template>
 
 <script>
-import * as d3 from 'd3';
+import cytoscape from 'cytoscape';
+import cola from 'cytoscape-cola';
+import d3Force from 'cytoscape-d3-force';
 
 export default {
-  mounted() {
-    const svg = d3
-      .select('#chart')
-      .append('svg')
-      .attr('width', '100%')
-      .attr('height', '100%');
+  async mounted() {
+    cytoscape.use(cola);
+    cytoscape.use(d3Force);
 
-    const svgWidth = parseFloat(svg.style('width'));
-    const svgHeight = parseFloat(svg.style('height'));
+    const data = await this.$content('test').fetch();
+    const cy = cytoscape({
+      container: this.$refs.cy,
+      style: [
+        {
+          selector: 'edge',
+          style: {
+            width: 'mapData(score, 0, 1, 0.2, 20)',
+            'line-opacity': 'mapData(score, 0, 1, 0.5, 1)',
+            'target-arrow-shape': 'triangle',
+            'curve-style': 'bezier',
+          },
+        },
+        {
+          selector: 'node',
+          style: {
+            label: 'data(id)',
+            width: 'mapData(dcn, 0, 1, 10, 50)',
+            height: 'mapData(dcn, 0, 1, 10, 50)',
+            'text-valign': 'top',
+          },
+        },
+      ],
+    });
 
-    svg.attr('viewBox', `0 0 ${svgWidth} ${svgHeight}`);
+    data.body.forEach((d, i) => {
+      if (d.score >= 0.1) {
+        cy.add([
+          {
+            group: 'nodes',
+            data: { id: d.ligand },
+          },
+          {
+            group: 'nodes',
+            data: { id: d.receptor },
+          },
+          {
+            group: 'edges',
+            data: {
+              id: d.ligand + d.receptor,
+              source: d.ligand,
+              target: d.receptor,
+              score: parseFloat(d.score),
+            },
+          },
+        ]);
+      }
+    });
 
-    this.createRect(
-      svg,
-      this.xStart,
-      this.yStart,
-      this.rectWidth,
-      this.rectHeight
-    );
-    this.createRect(
-      svg,
-      svgWidth - this.rectWidth - this.xStart,
-      this.yStart,
-      this.rectWidth,
-      this.rectHeight
-    );
-    this.createLine(
-      svg,
-      this.xStart + this.rectWidth + this.rectMargin,
-      this.yStart + this.rectHeight / 2,
-      svgWidth - this.xStart - this.rectWidth - this.rectMargin,
-      this.yStart + this.rectHeight / 2
-    );
-  },
-  data() {
-    return {
-      xStart: 65,
-      yStart: 40,
-      rectWidth: 150,
-      rectHeight: 30,
-      rectMargin: 5,
-    };
-  },
-  methods: {
-    createRect(svg, x, y, w, h) {
-      svg
-        .append('rect')
-        .attr('class', 'rect')
-        .attr('x', x)
-        .attr('y', y)
-        .attr('width', w)
-        .attr('height', h)
-        .attr('rx', 5)
-        .attr('ry', 5);
-    },
-    createLine(svg, x1, y1, x2, y2) {
-      svg
-        .append('line')
-        .attr('class', 'line')
-        .attr('x1', x1)
-        .attr('y1', y1)
-        .attr('x2', x2)
-        .attr('y2', y2);
-    },
+    const dcn = cy.elements().degreeCentralityNormalized();
+    cy.nodes().forEach((n) => {
+      n.data({
+        dcn: dcn.degree(n),
+      });
+    });
+
+    // cy.layout({
+    //   name: 'cose',
+    //   animate: false,
+    //   nodeRepulsion: 5000,
+    //   gravity: 10,
+    // }).run();
+
+    cy.layout({
+      name: 'd3-force',
+      fit: false,
+      infinite: true,
+      linkId: function id(d) {
+        return d.id;
+      },
+      linkDistance: 40,
+      manyBodyStrength: -300,
+    }).run();
   },
 };
 </script>
-
-<style>
-.rect {
-  fill: #f2f6fa;
-}
-.line {
-  stroke: #f2f6fa;
-  stroke-width: 1.5;
-  stroke-dasharray: 4;
-}
-</style>
