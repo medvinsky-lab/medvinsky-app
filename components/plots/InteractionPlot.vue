@@ -4,15 +4,16 @@
 
 <script>
 import cytoscape from 'cytoscape';
-import cola from 'cytoscape-cola';
 import d3Force from 'cytoscape-d3-force';
 
 export default {
   async mounted() {
-    cytoscape.use(cola);
     cytoscape.use(d3Force);
 
+    // Retrieve data
     const data = await this.$content('test').fetch();
+
+    // Initiate interaction plot
     const cy = cytoscape({
       container: this.$refs.cy,
       style: [
@@ -37,16 +38,17 @@ export default {
       ],
     });
 
+    // Add data
     data.body.forEach((d, i) => {
-      if (d.score >= 0.1) {
+      if (d.score >= 0.01) {
         cy.add([
           {
             group: 'nodes',
-            data: { id: d.ligand },
+            data: { id: d.ligand, type: 'ligand' },
           },
           {
             group: 'nodes',
-            data: { id: d.receptor },
+            data: { id: d.receptor, type: 'receptor' },
           },
           {
             group: 'edges',
@@ -61,6 +63,19 @@ export default {
       }
     });
 
+    // Color top N interactions
+    const n = 15;
+    cy.edges()
+      .sort((a, b) => {
+        return b - a;
+      })
+      .slice(0, n)
+      .style({
+        'line-color': '#10b981',
+        'target-arrow-color': '#10b981',
+      });
+
+    // Calculate node degrees and add as data
     const dcn = cy.elements().degreeCentralityNormalized();
     cy.nodes().forEach((n) => {
       n.data({
@@ -68,17 +83,11 @@ export default {
       });
     });
 
-    // cy.layout({
-    //   name: 'cose',
-    //   animate: false,
-    //   nodeRepulsion: 5000,
-    //   gravity: 10,
-    // }).run();
-
+    // Run layout
     cy.layout({
       name: 'd3-force',
       fit: false,
-      infinite: true,
+      infinite: false,
       linkId: function id(d) {
         return d.id;
       },
