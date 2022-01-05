@@ -6,10 +6,10 @@
 import cytoscape from 'cytoscape';
 import d3Force from 'cytoscape-d3-force';
 
+cytoscape.use(d3Force);
+
 export default {
   async mounted() {
-    cytoscape.use(d3Force);
-
     // Retrieve data
     const data = await this.$content('test').fetch();
 
@@ -17,6 +17,17 @@ export default {
     const cy = cytoscape({
       container: this.$refs.cy,
       style: [
+        {
+          selector: '.show',
+          style: {
+            label: 'data(score)',
+            'text-background-opacity': 1,
+            'text-background-shape': 'round-rectangle',
+            'text-background-color': '#f2f6fa',
+            'text-background-padding': 5,
+            'font-weight': 500,
+          },
+        },
         {
           selector: 'edge',
           style: {
@@ -32,7 +43,6 @@ export default {
             label: 'data(id)',
             width: 'mapData(dcn, 0, 1, 10, 50)',
             height: 'mapData(dcn, 0, 1, 10, 50)',
-            'text-valign': 'top',
           },
         },
       ],
@@ -40,15 +50,21 @@ export default {
 
     // Add data
     data.body.forEach((d, i) => {
-      if (d.score >= 0.01) {
+      if (d.score >= 0.1) {
         cy.add([
           {
             group: 'nodes',
             data: { id: d.ligand, type: 'ligand' },
+            style: {
+              shape: 'round-triangle',
+            },
           },
           {
             group: 'nodes',
             data: { id: d.receptor, type: 'receptor' },
+            style: {
+              shape: 'circle',
+            },
           },
           {
             group: 'edges',
@@ -56,7 +72,7 @@ export default {
               id: d.ligand + d.receptor,
               source: d.ligand,
               target: d.receptor,
-              score: parseFloat(d.score),
+              score: Math.round(parseFloat(d.score) * 100) / 100,
             },
           },
         ]);
@@ -71,9 +87,14 @@ export default {
       })
       .slice(0, n)
       .style({
-        'line-color': '#10b981',
-        'target-arrow-color': '#10b981',
+        'line-color': 'red',
+        'target-arrow-color': 'red',
       });
+
+    // Click to show label
+    cy.on('click', 'edge', (event) => {
+      event.target.toggleClass('show');
+    });
 
     // Calculate node degrees and add as data
     const dcn = cy.elements().degreeCentralityNormalized();
