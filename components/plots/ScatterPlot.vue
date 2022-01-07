@@ -72,14 +72,27 @@ export default {
                 },
               },
             },
-            tooltip: {
-              headerFormat: '<b>{series.name}</b><br>',
+          },
+          series: {
+            events: {
+              click(event) {
+                alert(this.name);
+              },
+              mouseOver(event) {
+                console.log(this.name);
+              },
             },
           },
         },
         series: this.plotData,
         credits: {
           enabled: false,
+        },
+        tooltip: {
+          enabled: true,
+          formatter() {
+            return 'Cluster <b>' + this.series.name + '</b>';
+          },
         },
       };
     },
