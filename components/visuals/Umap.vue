@@ -20,8 +20,8 @@
 <script>
 export default {
   data: () => ({
-    umap1Data: null,
-    umap2Data: null,
+    umap1Data: [],
+    umap2Data: [],
   }),
   async fetch() {
     const umap1Data = await this.$content('data/umap')
