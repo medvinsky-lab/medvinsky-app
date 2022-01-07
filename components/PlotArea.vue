@@ -12,10 +12,12 @@
         @click="setPlot('interaction')"
       ></standard-button>
     </div>
-    <div class="flex flex-grow">
-      <heatmap v-if="activePlot === 'heatmap'" :plot-data="plotData"></heatmap>
-      <interaction-plot v-if="activePlot === 'interaction'"></interaction-plot>
-    </div>
+    <heatmap
+      v-if="activePlot === 'heatmap'"
+      :key="activeDataset"
+      :plot-data="plotData"
+    ></heatmap>
+    <interaction-plot v-if="activePlot === 'interaction'"></interaction-plot>
   </main-card>
 </template>
 
@@ -25,16 +27,18 @@ export default {
     plotData: [],
   }),
   async fetch() {
+    let slug = '';
     if (this.activeDataset === 'LCM-Seq CS13') {
-      const content = await this.$content('heatmapCS13').fetch();
-      this.plotData = content.body;
+      slug = 'cs13';
     } else if (this.activeDataset === 'LCM-Seq CS14') {
-      const content = await this.$content('heatmapCS14').fetch();
-      this.plotData = content.body;
+      slug = 'cs14';
     } else if (this.activeDataset === 'LCM-Seq CS15') {
-      const content = await this.$content('heatmapCS15').fetch();
-      this.plotData = content.body;
+      slug = 'cs15';
+    } else if (this.activeDataset === 'UMAP CS13-CS15') {
+      slug = 'umap';
     }
+    const content = await this.$content('data/heatmap').where({ slug }).fetch();
+    this.plotData = content[0].body;
   },
   computed: {
     activeDataset() {

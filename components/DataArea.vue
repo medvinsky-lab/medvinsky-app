@@ -20,12 +20,13 @@
         @hover="propagateReceptor"
       ></drop-down>
     </div>
-    <div>
+    <div class="flex flex-grow">
       <cs-13
         v-if="activeDataset === 'LCM-Seq CS13'"
         :ligand="ligand"
         :receptor="receptor"
       ></cs-13>
+      <umap v-if="activeDataset === 'UMAP CS13-CS15'"></umap>
     </div>
   </main-card>
 </template>
