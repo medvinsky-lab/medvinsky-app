@@ -15,6 +15,7 @@ export default {
         chart: {
           type: 'heatmap',
           margin: 100,
+          animation: false,
         },
         title: {
           text: null,
@@ -76,6 +77,7 @@ export default {
         },
         series: [
           {
+            animation: false,
             type: 'heatmap',
             borderWidth: 3,
             borderColor: 'white',

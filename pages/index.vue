@@ -4,7 +4,7 @@
     <tutorial class="col-start-5 col-span-3"></tutorial>
     <data-area class="col-start-2 col-span-3"></data-area>
     <plot-area class="col-start-5 col-span-3"></plot-area>
-    <footer class="col-span-8"></footer>
+    <footer-area class="col-start-2 col-span-6"></footer-area>
   </div>
 </template>
 

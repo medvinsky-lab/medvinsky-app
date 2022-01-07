@@ -11,7 +11,7 @@ cytoscape.use(d3Force);
 export default {
   async mounted() {
     // Retrieve data
-    const data = await this.$content('test').fetch();
+    const data = await this.$content('data/interaction/test').fetch();
 
     // Initiate interaction plot
     const cy = cytoscape({
