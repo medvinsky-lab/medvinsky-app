@@ -1,82 +1,85 @@
 <template>
   <main-card class="flex flex-col">
-    <div class="flex flex-row space-x-2 h-16 w-full">
-      <drop-down
-        label="Dataset"
-        description="Select dataset"
-        :items="datasets"
-        @dispatch="reset"
-      ></drop-down>
-      <drop-down
-        label="Ligand"
-        description="Select ligand region"
-        :items="ligands"
-        @hover="propagateLigand"
-      ></drop-down>
-      <drop-down
-        label="Receptor"
-        description="Select receptor region"
-        :items="receptors"
-        @hover="propagateReceptor"
-      ></drop-down>
+    <div class="w-full flex flex-row space-x-2">
+      <div class="w-1/3 h-16 relative">
+        <drop-down
+          label="Dataset"
+          :selected="activeDataset"
+          :items="datasets"
+          @dispatch="setActiveDataset"
+        ></drop-down>
+      </div>
+      <div class="w-1/3 h-16 relative">
+        <drop-down
+          label="Ligand"
+          default-description="Select ligand region"
+          :items="ligands"
+        ></drop-down>
+      </div>
+      <div class="w-1/3 h-16 relative">
+        <drop-down
+          label="Receptor"
+          default-description="Select receptor region"
+          :items="receptors"
+        ></drop-down>
+      </div>
     </div>
     <div class="flex flex-grow">
       <cs-13
-        v-if="activeDataset === 'LCM-Seq CS13'"
-        :ligand="ligand"
-        :receptor="receptor"
+        v-if="activeDataset === 'cs13'"
+        :ligand="activeLigand"
+        :receptor="activeReceptor"
       ></cs-13>
-      <umap v-if="activeDataset === 'UMAP CS13-CS15'"></umap>
+      <umap v-if="activeDataset === 'umap'"></umap>
     </div>
   </main-card>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      datasets: [
-        { id: 'cs13', label: 'LCM-Seq CS13' },
-        { id: 'cs14', label: 'LCM-Seq CS14' },
-        { id: 'cs15', label: 'LCM-Seq CS15' },
-        { id: 'umap', label: 'UMAP CS13-CS15' },
-      ],
-      ligands: [
-        { id: 'do', label: 'Dorsal outer' },
-        { id: 'di', label: 'Dorsal inner' },
-        { id: 'vo', label: 'Ventral outer' },
-        { id: 'vi', label: 'Ventral inner' },
-        { id: 'geo', label: 'Gonadal epithelium outer' },
-        { id: 'gei', label: 'Gonadal epithelium inner' },
-      ],
-      receptors: [
-        { id: 'do', label: 'Dorsal outer' },
-        { id: 'di', label: 'Dorsal inner' },
-        { id: 'vo', label: 'Ventral outer' },
-        { id: 'vi', label: 'Ventral inner' },
-        { id: 'geo', label: 'Gonadal epithelium outer' },
-        { id: 'gei', label: 'Gonadal epithelium inner' },
-      ],
-      ligand: null,
-      receptor: null,
-    };
-  },
+  data: () => ({
+    datasets: [],
+    ligands: [
+      { id: 'do', label: 'Dorsal outer' },
+      { id: 'di', label: 'Dorsal inner' },
+      { id: 'vo', label: 'Ventral outer' },
+      { id: 'vi', label: 'Ventral inner' },
+      { id: 'geo', label: 'Gonadal epithelium outer' },
+      { id: 'gei', label: 'Gonadal epithelium inner' },
+    ],
+    receptors: [
+      { id: 'do', label: 'Dorsal outer' },
+      { id: 'di', label: 'Dorsal inner' },
+      { id: 'vo', label: 'Ventral outer' },
+      { id: 'vi', label: 'Ventral inner' },
+      { id: 'geo', label: 'Gonadal epithelium outer' },
+      { id: 'gei', label: 'Gonadal epithelium inner' },
+    ],
+  }),
   computed: {
     activeDataset() {
       return this.$store.getters.activeDataset;
     },
+    activeLigand() {
+      return this.$store.getters.activeLigand;
+    },
+    activeReceptor() {
+      return this.$store.getters.activeReceptor;
+    },
   },
   methods: {
-    reset() {
-      this.ligand = null;
-      this.receptor = null;
+    setActiveDataset(item) {
+      this.$store.dispatch('setActiveDataset', item.id);
     },
-    propagateLigand(value) {
-      this.ligand = value;
+    setActiveLigand(item) {
+      this.$store.dispatch('setActiveLigand', item.id);
     },
-    propagateReceptor(value) {
-      this.receptor = value;
+    setActiveReceptor(item) {
+      this.$store.dispatch('setActiveReceptor', item.id);
     },
+  },
+  async fetch() {
+    this.datasets = await this.$content('datasets').fetch();
   },
 };
 </script>

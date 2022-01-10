@@ -1,40 +1,40 @@
 <template>
-    <button
-        :class="{ 'bg-gray-100': hover }"
-        class="w-full text-left"
-        @mouseenter="toggleIn"
-        @mouseleave="toggleOut"
-        @click="$emit('item-click', label)"
-    >
-        <p class="p-2">
-            {{ label }}
-        </p>
-    </button>
+  <button
+    :class="{ 'bg-gray-100': hover }"
+    class="w-full text-left"
+    @mouseenter="toggleIn"
+    @mouseleave="toggleOut"
+    @click="$emit('item-click', item)"
+  >
+    <p class="p-2">
+      {{ item.label }}
+    </p>
+  </button>
 </template>
 
 <script>
 export default {
-    props: {
-        label: {
-            type: String,
-            default: 'label',
-        },
+  props: {
+    item: {
+      type: Object,
+      required: true,
     },
-    emits: ['item-click', 'item-enter', 'item-leave'],
-    data() {
-        return {
-            hover: false,
-        };
+  },
+  emits: ['item-click', 'item-enter', 'item-leave'],
+  data() {
+    return {
+      hover: false,
+    };
+  },
+  methods: {
+    toggleIn() {
+      this.hover = true;
+      this.$emit('item-enter', this.label);
     },
-    methods: {
-        toggleIn() {
-            this.hover = true;
-            this.$emit('item-enter', this.label);
-        },
-        toggleOut() {
-            this.hover = false;
-            this.$emit('item-leave', null);
-        },
+    toggleOut() {
+      this.hover = false;
+      this.$emit('item-leave', null);
     },
+  },
 };
 </script>

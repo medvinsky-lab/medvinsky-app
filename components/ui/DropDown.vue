@@ -1,26 +1,28 @@
 <template>
-  <div class="w-full">
+  <div>
     <p class="text-sm font-bold mb-1">{{ label }}</p>
     <div class="flex flex-col w-full" @mouseleave="close">
       <button class="bg-white py-1 px-2 text-left rounded" @click="toggle">
         <div class="flex justify-between">
-          <p class="truncate">{{ getDescription() }}</p>
+          <p class="truncate">{{ description }}</p>
           <i v-if="!active" class="gg-chevron-down"></i>
           <i v-if="active" class="gg-chevron-up"></i>
         </div>
       </button>
-      <div
-        v-if="active"
-        class="bg-white rounded mt-2 ring-2 ring-gray-200 z-50"
-      >
-        <drop-down-item
-          v-for="item in items"
-          :key="item.id"
-          :label="item.label"
-          @item-enter="propagate"
-          @item-leave="propagate"
-          @item-click="dispatch"
-        ></drop-down-item>
+      <div class="relative mt-2">
+        <div
+          v-show="active"
+          class="bg-white rounded ring-2 ring-gray-200 absolute w-auto z-10"
+        >
+          <drop-down-item
+            v-for="item in items"
+            :key="item.id"
+            :item="item"
+            @item-enter="hover"
+            @item-leave="hover"
+            @item-click="dispatch"
+          ></drop-down-item>
+        </div>
       </div>
     </div>
   </div>
@@ -33,9 +35,11 @@ export default {
       type: String,
       default: 'Label',
     },
-    description: {
+    selected: {
       type: String,
-      default: 'Description',
+    },
+    defaultDescription: {
+      type: String,
     },
     items: {
       type: Array,
@@ -43,11 +47,7 @@ export default {
     },
   },
   emits: ['hover', 'dispatch'],
-  data() {
-    return {
-      active: false,
-    };
-  },
+  data: () => ({ active: false }),
   methods: {
     toggle() {
       this.active = !this.active;
@@ -55,47 +55,25 @@ export default {
     close() {
       this.active = false;
     },
-    propagate(value) {
+    hover(value) {
       this.$emit('hover', value);
     },
     dispatch(value) {
-      const label = this.label.toLowerCase();
-      if (label === 'dataset') {
-        this.$store.dispatch('setDataset', value);
-        this.$store.dispatch('setLigand', null);
-        this.$store.dispatch('setReceptor', null);
-      }
-      if (label === 'ligand') {
-        this.$store.dispatch('setLigand', value);
-      }
-      if (label === 'receptor') {
-        this.$store.dispatch('setReceptor', value);
-      }
+      this.$emit('dispatch', value);
       this.close();
-      this.$emit('dispatch');
     },
-    getDescription() {
-      const label = this.label.toLowerCase();
-      if (label === 'dataset') {
-        const activeDataset = this.$store.getters.activeDataset;
-        return activeDataset;
+  },
+  computed: {
+    description() {
+      if (this.selected) {
+        const selectedItem = this.items.find(
+          (item) => item.id === this.selected
+        );
+        return selectedItem.label;
+      } else if (this.defaultDescription) {
+        return this.defaultDescription;
       }
-      if (label === 'ligand') {
-        const activeLigand = this.$store.getters.activeLigand;
-        if (activeLigand === null) {
-          return this.description;
-        } else {
-          return activeLigand;
-        }
-      }
-      if (label === 'receptor') {
-        const activeReceptor = this.$store.getters.activeReceptor;
-        if (activeReceptor === null) {
-          return this.description;
-        } else {
-          return activeReceptor;
-        }
-      }
+      return null;
     },
   },
 };
