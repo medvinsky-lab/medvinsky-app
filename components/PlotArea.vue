@@ -4,18 +4,18 @@
       <standard-button
         label="Heatmap"
         :active="activePlot === 'heatmap'"
-        @click="setPlot('heatmap')"
+        @click="setActivePlot('heatmap')"
       ></standard-button>
       <standard-button
         label="Interactions"
         :active="activePlot === 'interaction'"
-        @click="setPlot('interaction')"
+        @click="setActivePlot('interaction')"
       ></standard-button>
     </div>
     <heatmap
       v-if="activePlot === 'heatmap'"
       :key="activeDataset"
-      :plot-data="plotData"
+      :data="data"
     ></heatmap>
     <interaction-plot v-if="activePlot === 'interaction'"></interaction-plot>
   </main-card>
@@ -24,21 +24,16 @@
 <script>
 export default {
   data: () => ({
-    plotData: [],
+    data: [],
   }),
   async fetch() {
-    let slug = '';
-    if (this.activeDataset === 'LCM-Seq CS13') {
-      slug = 'cs13';
-    } else if (this.activeDataset === 'LCM-Seq CS14') {
-      slug = 'cs14';
-    } else if (this.activeDataset === 'LCM-Seq CS15') {
-      slug = 'cs15';
-    } else if (this.activeDataset === 'UMAP CS13-CS15') {
-      slug = 'umap';
-    }
-    const content = await this.$content('data/heatmap').where({ slug }).fetch();
-    this.plotData = content[0].body;
+    const data = await this.$content('heatmaps')
+      .where({ slug: this.activeDataset })
+      .fetch()
+      .then((res) => {
+        return res[0];
+      });
+    this.data = data;
   },
   computed: {
     activeDataset() {
@@ -52,8 +47,8 @@ export default {
     activeDataset: '$fetch',
   },
   methods: {
-    setPlot(value) {
-      this.$store.dispatch('setPlot', value);
+    setActivePlot(value) {
+      this.$store.dispatch('setActivePlot', value);
     },
   },
 };

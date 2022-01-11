@@ -65,18 +65,11 @@ export default {
                 },
               },
             },
-            states: {
-              hover: {
-                marker: {
-                  enabled: false,
-                },
-              },
-            },
           },
           series: {
             events: {
               click(event) {
-                alert(this.name);
+                console.log(this.name);
               },
               mouseOver(event) {
                 console.log(this.name);

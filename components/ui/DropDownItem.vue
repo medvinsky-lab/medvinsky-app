@@ -1,7 +1,7 @@
 <template>
   <button
     :class="{ 'bg-gray-100': hover }"
-    class="w-full text-left"
+    class="w-full text-left text-sm font-medium"
     @mouseenter="toggleIn"
     @mouseleave="toggleOut"
     @click="$emit('item-click', item)"
@@ -29,7 +29,7 @@ export default {
   methods: {
     toggleIn() {
       this.hover = true;
-      this.$emit('item-enter', this.label);
+      this.$emit('item-enter', this.item.id);
     },
     toggleOut() {
       this.hover = false;

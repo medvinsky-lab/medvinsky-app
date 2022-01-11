@@ -8,8 +8,15 @@
 
 <script>
 export default {
-  props: ['plotData'],
+  props: ['data'],
   computed: {
+    axis() {
+      const axisLabels = [];
+      this.data.axis.forEach(function (e, i) {
+        axisLabels[i] = e.label;
+      });
+      return axisLabels;
+    },
     chartOptions() {
       return {
         chart: {
@@ -21,7 +28,7 @@ export default {
           text: null,
         },
         xAxis: {
-          categories: this.xAxis,
+          categories: this.axis,
           gridLineWidth: 0,
           lineWidth: 0,
           labels: {
@@ -34,7 +41,7 @@ export default {
           },
         },
         yAxis: {
-          categories: this.yAxis,
+          categories: this.axis,
           gridLineWidth: 0,
           title: null,
           reversed: true,
@@ -82,7 +89,7 @@ export default {
             borderWidth: 3,
             borderColor: 'white',
             borderRadius: 10,
-            data: this.series,
+            data: this.data.data,
             dataLabels: {
               enabled: true,
               color: '#000000',
@@ -93,24 +100,6 @@ export default {
           enabled: false,
         },
       };
-    },
-    xAxis() {
-      return Object.keys(this.plotData[0]);
-    },
-    yAxis() {
-      return Object.keys(this.plotData[0]);
-    },
-    series() {
-      const series = [];
-      this.plotData.forEach((item, row) => {
-        Object.entries(item).forEach(([key, val], col) => {
-          const x = parseFloat(col);
-          const y = parseFloat(row);
-          const value = parseFloat(val);
-          series.push({ x, y, value });
-        });
-      });
-      return series;
     },
   },
 };

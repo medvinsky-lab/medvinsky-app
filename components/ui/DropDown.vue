@@ -4,15 +4,20 @@
     <div class="flex flex-col w-full" @mouseleave="close">
       <button class="bg-white py-1 px-2 text-left rounded" @click="toggle">
         <div class="flex justify-between">
-          <p class="truncate">{{ description }}</p>
-          <i v-if="!active" class="gg-chevron-down"></i>
-          <i v-if="active" class="gg-chevron-up"></i>
+          <p
+            class="truncate text-sm font-medium"
+            :class="this.selection ? 'text-gray-700' : 'text-gray-400'"
+          >
+            {{ description }}
+          </p>
+          <i v-if="!active" class="gg-chevron-down text-gray-700"></i>
+          <i v-if="active" class="gg-chevron-up text-gray-700"></i>
         </div>
       </button>
       <div class="relative mt-2">
         <div
           v-show="active"
-          class="bg-white rounded ring-2 ring-gray-200 absolute w-auto z-10"
+          class="bg-white rounded ring-2 ring-gray-200 absolute z-10 dd-content"
         >
           <drop-down-item
             v-for="item in items"
@@ -35,7 +40,7 @@ export default {
       type: String,
       default: 'Label',
     },
-    selected: {
+    selection: {
       type: String,
     },
     defaultDescription: {
@@ -65,11 +70,9 @@ export default {
   },
   computed: {
     description() {
-      if (this.selected) {
-        const selectedItem = this.items.find(
-          (item) => item.id === this.selected
-        );
-        return selectedItem.label;
+      if (this.selection) {
+        const selection = this.items.find((item) => item.id === this.selection);
+        return selection.label;
       } else if (this.defaultDescription) {
         return this.defaultDescription;
       }
@@ -78,3 +81,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.dd-content {
+  width: 20vw;
+}
+</style>

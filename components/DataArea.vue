@@ -4,7 +4,7 @@
       <div class="w-1/3 h-16 relative">
         <drop-down
           label="Dataset"
-          :selected="activeDataset"
+          :selection="activeDataset"
           :items="datasets"
           @dispatch="setActiveDataset"
         ></drop-down>
@@ -13,22 +13,28 @@
         <drop-down
           label="Ligand"
           default-description="Select ligand region"
+          :selection="activeLigand"
           :items="ligands"
+          @dispatch="setActiveLigand"
+          @hover="setHoveredLigand"
         ></drop-down>
       </div>
       <div class="w-1/3 h-16 relative">
         <drop-down
           label="Receptor"
           default-description="Select receptor region"
+          :selection="activeReceptor"
           :items="receptors"
+          @dispatch="setActiveReceptor"
+          @hover="setHoveredReceptor"
         ></drop-down>
       </div>
     </div>
     <div class="flex flex-grow">
       <cs-13
         v-if="activeDataset === 'cs13'"
-        :ligand="activeLigand"
-        :receptor="activeReceptor"
+        :hovered-ligand="hoveredLigand"
+        :hovered-receptor="hoveredReceptor"
       ></cs-13>
       <umap v-if="activeDataset === 'umap'"></umap>
     </div>
@@ -39,22 +45,10 @@
 export default {
   data: () => ({
     datasets: [],
-    ligands: [
-      { id: 'do', label: 'Dorsal outer' },
-      { id: 'di', label: 'Dorsal inner' },
-      { id: 'vo', label: 'Ventral outer' },
-      { id: 'vi', label: 'Ventral inner' },
-      { id: 'geo', label: 'Gonadal epithelium outer' },
-      { id: 'gei', label: 'Gonadal epithelium inner' },
-    ],
-    receptors: [
-      { id: 'do', label: 'Dorsal outer' },
-      { id: 'di', label: 'Dorsal inner' },
-      { id: 'vo', label: 'Ventral outer' },
-      { id: 'vi', label: 'Ventral inner' },
-      { id: 'geo', label: 'Gonadal epithelium outer' },
-      { id: 'gei', label: 'Gonadal epithelium inner' },
-    ],
+    ligands: [],
+    receptors: [],
+    hoveredLigand: null,
+    hoveredReceptor: null,
   }),
   computed: {
     activeDataset() {
@@ -70,6 +64,8 @@ export default {
   methods: {
     setActiveDataset(item) {
       this.$store.dispatch('setActiveDataset', item.id);
+      this.$store.dispatch('setActiveLigand', null);
+      this.$store.dispatch('setActiveReceptor', null);
     },
     setActiveLigand(item) {
       this.$store.dispatch('setActiveLigand', item.id);
@@ -77,9 +73,36 @@ export default {
     setActiveReceptor(item) {
       this.$store.dispatch('setActiveReceptor', item.id);
     },
+    setHoveredLigand(item) {
+      this.hoveredLigand = item;
+    },
+    setHoveredReceptor(item) {
+      this.hoveredReceptor = item;
+    },
   },
   async fetch() {
     this.datasets = await this.$content('datasets').fetch();
+    this.ligands = await this.$content('heatmaps')
+      .where({
+        slug: this.activeDataset,
+      })
+      .only(['axis'])
+      .fetch()
+      .then((value) => {
+        return value[0].axis;
+      });
+    this.receptors = await this.$content('heatmaps')
+      .where({
+        slug: this.activeDataset,
+      })
+      .only(['axis'])
+      .fetch()
+      .then((value) => {
+        return value[0].axis;
+      });
+  },
+  watch: {
+    activeDataset: '$fetch',
   },
 };
 </script>
