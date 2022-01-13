@@ -2,17 +2,19 @@
   <div class="flex-grow">
     <scatter-plot
       class="mb-4 rounded"
-      :plot-data="umap1Data"
       title="Hematoendothelial"
       x-axis-title="UMAP1"
       y-axis-title="UMAP2"
+      :plot-data="umap1Data"
+      :selections="[activeLigand, activeReceptor]"
     />
     <scatter-plot
       class="rounded"
-      :plot-data="umap2Data"
       title="Mesenchymal/epithelial"
       x-axis-title="UMAP1"
       y-axis-title="UMAP2"
+      :plot-data="umap2Data"
+      :selections="[activeLigand, activeReceptor]"
     />
   </div>
 </template>
@@ -23,6 +25,12 @@ export default {
     umap1Data: [],
     umap2Data: [],
   }),
+  props: {
+    activeLigand: { type: String },
+    activeReceptor: { type: String },
+    hoveredLigand: { type: String },
+    hoveredReceptor: { type: String },
+  },
   async fetch() {
     const umap1Data = await this.$content('data/umap')
       .where({ slug: 'umap_he1' })

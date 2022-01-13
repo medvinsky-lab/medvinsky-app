@@ -1,5 +1,7 @@
 <template>
-  <highchart :options="chartOptions" />
+  <div>
+    <highchart :options="chartOptions" @chartLoaded="chartLoaded" />
+  </div>
 </template>
 
 <script>
@@ -22,15 +24,68 @@ export default {
       default: 'Y',
     },
   },
+  data() {
+    return {
+      opacity: 1,
+    };
+  },
+  methods: {
+    async chartLoaded(chart) {
+      // Need to wait here for DOM updates to take place...
+      await new Promise((resolve, reject) => {
+        setTimeout(() => {
+          console.log('Done waiting');
+          resolve();
+        }, 1000);
+      });
+
+      const dropDownLigand =
+        this.$parent.$parent.$parent.$refs['dropdown-ligand'].$refs.dropdown;
+      const dropDownReceptor =
+        this.$parent.$parent.$parent.$refs['dropdown-receptor'].$refs.dropdown;
+      const dropDownItems =
+        this.$parent.$parent.$parent.$refs['dropdown-ligand'].$children;
+
+      dropDownLigand.addEventListener('click', () => {
+        chart.series.forEach((s) => {
+          s.setState('inactive');
+        });
+      });
+      dropDownLigand.addEventListener('mouseleave', () => {
+        chart.series.forEach((s) => {
+          s.setState('');
+        });
+      });
+      dropDownReceptor.addEventListener('click', () => {
+        chart.series.forEach((s) => {
+          s.setState('inactive');
+        });
+      });
+      dropDownReceptor.addEventListener('mouseleave', () => {
+        chart.series.forEach((s) => {
+          s.setState('');
+        });
+      });
+      Array.from(dropDownItems).forEach((e) => {
+        const seriesId = e.item.id;
+        const series = chart.get(seriesId);
+        console.log(series);
+        e.$el.addEventListener('mouseenter', () => {
+          series.setState('hover');
+        });
+        // e.$el.addEventListener('mouseleave', () => {
+        //   series.setState('');
+        // });
+      });
+    },
+  },
   computed: {
     chartOptions() {
+      // const ctx = this;
       return {
         chart: {
           type: 'scatter',
           zoomType: 'xy',
-        },
-        title: {
-          text: this.title,
         },
         xAxis: {
           title: {
@@ -53,7 +108,17 @@ export default {
             enabled: false,
           },
         },
+        title: {
+          text: this.title,
+        },
         plotOptions: {
+          series: {
+            states: {
+              inactive: {
+                enabled: true,
+              },
+            },
+          },
           scatter: {
             marker: {
               symbol: 'circle',
@@ -63,16 +128,6 @@ export default {
                   enabled: true,
                   lineColor: 'rgb(100,100,100)',
                 },
-              },
-            },
-          },
-          series: {
-            events: {
-              click(event) {
-                console.log(this.name);
-              },
-              mouseOver(event) {
-                console.log(this.name);
               },
             },
           },

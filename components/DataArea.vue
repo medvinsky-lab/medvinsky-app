@@ -3,6 +3,7 @@
     <div class="w-full flex flex-row space-x-2">
       <div class="w-1/3 h-16 relative">
         <drop-down
+          ref="dropdown-data"
           label="Dataset"
           :selection="activeDataset"
           :items="datasets"
@@ -11,6 +12,7 @@
       </div>
       <div class="w-1/3 h-16 relative">
         <drop-down
+          ref="dropdown-ligand"
           label="Ligand"
           default-description="Select ligand region"
           :selection="activeLigand"
@@ -21,6 +23,7 @@
       </div>
       <div class="w-1/3 h-16 relative">
         <drop-down
+          ref="dropdown-receptor"
           label="Receptor"
           default-description="Select receptor region"
           :selection="activeReceptor"
@@ -36,7 +39,13 @@
         :hovered-ligand="hoveredLigand"
         :hovered-receptor="hoveredReceptor"
       ></cs-13>
-      <umap v-if="activeDataset === 'umap'"></umap>
+      <umap
+        v-if="activeDataset === 'umap'"
+        :active-ligand="activeLigand"
+        :active-receptor="activeReceptor"
+        :hovered-ligand="hoveredLigand"
+        :hovered-receptor="hoveredReceptor"
+      ></umap>
     </div>
   </main-card>
 </template>

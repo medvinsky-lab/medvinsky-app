@@ -1,7 +1,8 @@
 <template>
   <button
+    ref="dropdown-item"
     :class="{ 'bg-gray-100': hover }"
-    class="w-full text-left text-sm font-medium"
+    class="w-full text-left text-sm font-medium dropdown-item"
     @mouseenter="toggleIn"
     @mouseleave="toggleOut"
     @click="$emit('item-click', item)"

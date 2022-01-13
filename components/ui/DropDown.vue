@@ -1,7 +1,7 @@
 <template>
   <div>
-    <p class="text-sm font-bold mb-1">{{ label }}</p>
-    <div class="flex flex-col w-full" @mouseleave="close">
+    <p id="dropdownlabel" class="text-sm font-bold mb-1">{{ label }}</p>
+    <div ref="dropdown" class="flex flex-col w-full" @mouseleave="close">
       <button class="bg-white py-1 px-2 text-left rounded" @click="toggle">
         <div class="flex justify-between">
           <p
