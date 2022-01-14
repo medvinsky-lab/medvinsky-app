@@ -43,39 +43,47 @@ export default {
         this.$parent.$parent.$parent.$refs['dropdown-ligand'].$refs.dropdown;
       const dropDownReceptor =
         this.$parent.$parent.$parent.$refs['dropdown-receptor'].$refs.dropdown;
-      const dropDownItems =
+      const dropDownItemsLigand =
         this.$parent.$parent.$parent.$refs['dropdown-ligand'].$children;
+      const dropDownItemsReceptor =
+        this.$parent.$parent.$parent.$refs['dropdown-receptor'].$children;
 
-      dropDownLigand.addEventListener('click', () => {
-        chart.series.forEach((s) => {
-          s.setState('inactive');
+      [dropDownLigand, dropDownReceptor].forEach((e) => {
+        e.addEventListener('click', () => {
+          chart.series.forEach((s) => {
+            s.setState('inactive');
+          });
+        });
+        e.addEventListener('mouseleave', () => {
+          chart.series.forEach((s) => {
+            s.setState('');
+          });
         });
       });
-      dropDownLigand.addEventListener('mouseleave', () => {
-        chart.series.forEach((s) => {
-          s.setState('');
-        });
+
+      const ids = [];
+      this.plotData.forEach((e, i) => {
+        ids[i] = e.id;
       });
-      dropDownReceptor.addEventListener('click', () => {
-        chart.series.forEach((s) => {
-          s.setState('inactive');
+
+      [dropDownItemsLigand, dropDownItemsReceptor].forEach((elements) => {
+        Array.from(elements).forEach((e) => {
+          const seriesId = e.item.id;
+          const series = chart.get(seriesId);
+          if (ids.includes(seriesId)) {
+            e.$el.addEventListener('mouseenter', () => {
+              series.setState('hover');
+            });
+            e.$el.addEventListener('mouseleave', () => {
+              series.setState('inactive');
+            });
+            e.$el.addEventListener('click', () => {
+              series.points.forEach((p) => {
+                p.setState('select');
+              });
+            });
+          }
         });
-      });
-      dropDownReceptor.addEventListener('mouseleave', () => {
-        chart.series.forEach((s) => {
-          s.setState('');
-        });
-      });
-      Array.from(dropDownItems).forEach((e) => {
-        const seriesId = e.item.id;
-        const series = chart.get(seriesId);
-        console.log(series);
-        e.$el.addEventListener('mouseenter', () => {
-          series.setState('hover');
-        });
-        // e.$el.addEventListener('mouseleave', () => {
-        //   series.setState('');
-        // });
       });
     },
   },
@@ -113,6 +121,7 @@ export default {
         },
         plotOptions: {
           series: {
+            allowPointSelect: true,
             states: {
               inactive: {
                 enabled: true,
