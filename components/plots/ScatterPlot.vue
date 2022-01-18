@@ -23,6 +23,9 @@ export default {
       type: String,
       default: 'Y',
     },
+    selections: {
+      type: Array,
+    },
   },
   data() {
     return {
@@ -56,7 +59,7 @@ export default {
         });
         e.addEventListener('mouseleave', () => {
           chart.series.forEach((s) => {
-            s.setState('');
+            s.setState('normal');
           });
         });
       });
@@ -77,14 +80,25 @@ export default {
             e.$el.addEventListener('mouseleave', () => {
               series.setState('inactive');
             });
-            e.$el.addEventListener('click', () => {
-              series.points.forEach((p) => {
-                p.setState('select');
-              });
-            });
           }
+          e.$el.addEventListener('click', () => {
+            chart.series.forEach((s) => {
+              if (this.selections.includes(s.options.id)) {
+                s.points.forEach((p) => {
+                  p.setState('select');
+                });
+              } else if (!this.selections.includes(s.options.id)) {
+                s.points.forEach((p) => {
+                  p.setState('normal');
+                });
+              }
+            });
+          });
         });
       });
+      // dropDownItemsLigand.forEach((e) => {
+      //   console.log(e.$el);
+      // });
     },
   },
   computed: {
@@ -121,9 +135,12 @@ export default {
         },
         plotOptions: {
           series: {
-            allowPointSelect: true,
+            allowPointSelect: false,
             states: {
               inactive: {
+                enabled: true,
+              },
+              select: {
                 enabled: true,
               },
             },
@@ -134,7 +151,7 @@ export default {
               radius: 2,
               states: {
                 hover: {
-                  enabled: true,
+                  enabled: false,
                   lineColor: 'rgb(100,100,100)',
                 },
               },

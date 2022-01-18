@@ -2,7 +2,7 @@
   {
     "id": "cl_1",
     "name": "1",
-    "color": "rgba(129,26,105,0.5)",
+    "color": "rgba(144,238,144,0.8)",
     "data": [
       [8.241903, 4.866606],
       [11.798722, 6.3260646],
@@ -300,8 +300,9 @@
       "states": {
         "select": {
           "lineWidth": 1,
-          "radius": 3,
-          "fillColor": "rgba(129,26,105,0.5)"
+          "lineColor": "rgba(144,238,144,1)",
+          "radius": 4,
+          "fillColor": "rgba(144,238,144,0.5)"
         }
       }
     }
@@ -309,7 +310,7 @@
   {
     "id": "cl_2",
     "name": "2",
-    "color": "rgba(139,135,209,0.5)",
+    "color": "rgba(178,34,34,0.8)",
     "data": [
       [2.5137005, -0.9568642],
       [1.897581, 1.0836028],
@@ -585,8 +586,9 @@
       "states": {
         "select": {
           "lineWidth": 1,
-          "radius": 3,
-          "fillColor": "rgba(139,135,209,0.5)"
+          "lineColor": "rgba(178,34,34,1)",
+          "radius": 4,
+          "fillColor": "rgba(178,34,34,0.5)"
         }
       }
     }
@@ -594,7 +596,7 @@
   {
     "id": "cl_3",
     "name": "3",
-    "color": "rgba(226,160,142,0.5)",
+    "color": "rgba(30,144,255,0.8)",
     "data": [
       [7.459149, 10.1569195],
       [7.145642, 10.10398],
@@ -868,8 +870,9 @@
       "states": {
         "select": {
           "lineWidth": 1,
-          "radius": 3,
-          "fillColor": "rgba(226,160,142,0.5)"
+          "lineColor": "rgba(30,144,255,1)",
+          "radius": 4,
+          "fillColor": "rgba(30,144,255,0.5)"
         }
       }
     }
@@ -877,7 +880,7 @@
   {
     "id": "cl_5",
     "name": "5",
-    "color": "rgba(42,72,240,0.5)",
+    "color": "rgba(221,160,221,0.8)",
     "data": [
       [4.3549266, 3.8905797],
       [6.935002, 4.314093],
@@ -1104,8 +1107,9 @@
       "states": {
         "select": {
           "lineWidth": 1,
-          "radius": 3,
-          "fillColor": "rgba(42,72,240,0.5)"
+          "lineColor": "rgba(221,160,221,1)",
+          "radius": 4,
+          "fillColor": "rgba(221,160,221,0.5)"
         }
       }
     }
@@ -1113,7 +1117,7 @@
   {
     "id": "cl_6",
     "name": "6",
-    "color": "rgba(15,1,43,0.5)",
+    "color": "rgba(60,179,113,0.8)",
     "data": [
       [8.919237, 7.552357],
       [10.163972, 8.136055],
@@ -1262,8 +1266,9 @@
       "states": {
         "select": {
           "lineWidth": 1,
-          "radius": 3,
-          "fillColor": "rgba(15,1,43,0.5)"
+          "lineColor": "rgba(60,179,113,1)",
+          "radius": 4,
+          "fillColor": "rgba(60,179,113,0.5)"
         }
       }
     }
@@ -1271,7 +1276,7 @@
   {
     "id": "cl_7",
     "name": "7",
-    "color": "rgba(98,240,94,0.5)",
+    "color": "rgba(186,85,211,0.8)",
     "data": [
       [8.776317, 9.860492],
       [8.091531, 8.620718],
@@ -1340,8 +1345,9 @@
       "states": {
         "select": {
           "lineWidth": 1,
-          "radius": 3,
-          "fillColor": "rgba(98,240,94,0.5)"
+          "lineColor": "rgba(186,85,211,1)",
+          "radius": 4,
+          "fillColor": "rgba(186,85,211,0.5)"
         }
       }
     }
