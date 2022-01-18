@@ -16,6 +16,8 @@
       v-if="activePlot === 'heatmap'"
       :key="activeDataset"
       :data="data"
+      :active-ligand="activeLigand"
+      :active-receptor="activeReceptor"
     ></heatmap>
     <interaction-plot v-if="activePlot === 'interaction'"></interaction-plot>
   </main-card>
@@ -38,6 +40,12 @@ export default {
   computed: {
     activeDataset() {
       return this.$store.getters.activeDataset;
+    },
+    activeLigand() {
+      return this.$store.getters.activeLigand;
+    },
+    activeReceptor() {
+      return this.$store.getters.activeReceptor;
     },
     activePlot() {
       return this.$store.getters.activePlot;

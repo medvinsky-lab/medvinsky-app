@@ -3,7 +3,6 @@
     <div class="w-full flex flex-row space-x-2">
       <div class="w-1/3 h-16 relative">
         <drop-down
-          ref="dropdown-data"
           label="Dataset"
           :selection="activeDataset"
           :items="datasets"
