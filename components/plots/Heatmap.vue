@@ -54,13 +54,13 @@ export default {
             ligandIdx = this.axisIds.indexOf(this.activeLigand);
             receptorIdx = this.axisIds.indexOf(this.activeReceptor);
             if (!selections.includes(null)) {
-              console.log(selections);
               chart.series[0].points.forEach((p) => {
                 const xLabel = p.x;
                 const yLabel = p.y;
                 p.setState('');
                 if (yLabel === ligandIdx) {
                   if (xLabel === receptorIdx) {
+                    p.select();
                     p.setState('select');
                   }
                 }

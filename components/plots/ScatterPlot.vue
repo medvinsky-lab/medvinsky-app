@@ -85,10 +85,12 @@ export default {
             chart.series.forEach((s) => {
               if (this.selections.includes(s.options.id)) {
                 s.points.forEach((p) => {
+                  p.selected = true;
                   p.setState('select');
                 });
               } else if (!this.selections.includes(s.options.id)) {
                 s.points.forEach((p) => {
+                  p.selected = false;
                   p.setState('normal');
                 });
               }
