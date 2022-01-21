@@ -38,6 +38,16 @@
         :hovered-ligand="hoveredLigand"
         :hovered-receptor="hoveredReceptor"
       ></cs-13>
+      <cs-14
+        v-if="activeDataset === 'cs14'"
+        :hovered-ligand="hoveredLigand"
+        :hovered-receptor="hoveredReceptor"
+      ></cs-14>
+      <cs-16
+        v-if="activeDataset === 'cs16'"
+        :hovered-ligand="hoveredLigand"
+        :hovered-receptor="hoveredReceptor"
+      ></cs-16>
       <umap
         v-if="activeDataset === 'umap'"
         :active-ligand="activeLigand"
