@@ -299,6 +299,19 @@
  */
 
 
+/*!
+ * vue-client-only v0.0.0-semantic-release
+ * (c) 2021-present egoist <0x142857@gmail.com>
+ * Released under the MIT License.
+ */
+
+/*!
+ * vue-no-ssr v1.1.1
+ * (c) 2018-present egoist <0x142857@gmail.com>
+ * Released under the MIT License.
+ */
+
+
 /**
  * @license Highcharts JS v9.3.2 (2021-11-29)
  *
@@ -308,17 +321,6 @@
  *
  * License: www.highcharts.com/license
  */
-
-
-/*!
-Embeddable Minimum Strictly-Compliant Promises/A+ 1.1.1 Thenable
-Copyright (c) 2013-2014 Ralf S. Engelschall (http://engelschall.com)
-Licensed under The MIT License (http://opensource.org/licenses/MIT)
-*/
-
-/*! Bezier curve function generator. Copyright Gaetan Renaudeau. MIT License: http://en.wikipedia.org/wiki/MIT_License */
-
-/*! Runge-Kutta spring physics function generator. Adapted from Framer.js, copyright Koen Bok. MIT License: http://en.wikipedia.org/wiki/MIT_License */
 
 
 /**
@@ -387,19 +389,6 @@ Licensed under The MIT License (http://opensource.org/licenses/MIT)
  */
 
 
-/*!
- * vue-client-only v0.0.0-semantic-release
- * (c) 2021-present egoist <0x142857@gmail.com>
- * Released under the MIT License.
- */
-
-/*!
- * vue-no-ssr v1.1.1
- * (c) 2018-present egoist <0x142857@gmail.com>
- * Released under the MIT License.
- */
-
-
 /**
  * @license Highmaps JS v9.3.2 (2021-11-29)
  *
@@ -437,6 +426,25 @@ Licensed under The MIT License (http://opensource.org/licenses/MIT)
  * (c) 2010-2021 Torstein Honsi
  *
  * License: www.highcharts.com/license
+ */
+
+
+/*!
+  * vue-router v3.5.3
+  * (c) 2021 Evan You
+  * @license MIT
+  */
+
+/*!
+ * Vue.js v2.6.14
+ * (c) 2014-2021 Evan You
+ * Released under the MIT License.
+ */
+
+/*!
+ * vuex v3.6.2
+ * (c) 2021 Evan You
+ * @license MIT
  */
 
 
@@ -619,17 +627,6 @@ Licensed under The MIT License (http://opensource.org/licenses/MIT)
 /**
  * @license Highcharts JS v9.3.2 (2021-11-29)
  *
- * Solid angular gauge module
- *
- * (c) 2010-2021 Torstein Honsi
- *
- * License: www.highcharts.com/license
- */
-
-
-/**
- * @license Highcharts JS v9.3.2 (2021-11-29)
- *
  * Item series type for Highcharts
  *
  * (c) 2019 Torstein Honsi
@@ -672,21 +669,24 @@ Licensed under The MIT License (http://opensource.org/licenses/MIT)
 
 
 /*!
-  * vue-router v3.5.3
-  * (c) 2021 Evan You
-  * @license MIT
-  */
+Embeddable Minimum Strictly-Compliant Promises/A+ 1.1.1 Thenable
+Copyright (c) 2013-2014 Ralf S. Engelschall (http://engelschall.com)
+Licensed under The MIT License (http://opensource.org/licenses/MIT)
+*/
 
-/*!
- * Vue.js v2.6.14
- * (c) 2014-2021 Evan You
- * Released under the MIT License.
- */
+/*! Bezier curve function generator. Copyright Gaetan Renaudeau. MIT License: http://en.wikipedia.org/wiki/MIT_License */
 
-/*!
- * vuex v3.6.2
- * (c) 2021 Evan You
- * @license MIT
+/*! Runge-Kutta spring physics function generator. Adapted from Framer.js, copyright Koen Bok. MIT License: http://en.wikipedia.org/wiki/MIT_License */
+
+
+/**
+ * @license Highcharts JS v9.3.2 (2021-11-29)
+ *
+ * Solid angular gauge module
+ *
+ * (c) 2010-2021 Torstein Honsi
+ *
+ * License: www.highcharts.com/license
  */
 
 
