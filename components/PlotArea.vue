@@ -15,27 +15,29 @@
     <heatmap
       v-if="activePlot === 'heatmap'"
       :key="activeDataset"
-      :data="data"
+      :data="heatmapData"
       :active-ligand="activeLigand"
       :active-receptor="activeReceptor"
     ></heatmap>
-    <interaction-plot v-if="activePlot === 'interaction'"></interaction-plot>
+    <interaction-plot
+      v-else-if="activePlot === 'interaction' && activeLigand && activeReceptor"
+      :plot-data="interactionsData"
+    ></interaction-plot>
+    <div v-else class="flex flex-grow justify-center items-center">
+      <div class="bg-white p-8 rounded">
+        Please select ligand and receptor populations
+      </div>
+    </div>
   </main-card>
 </template>
 
 <script>
 export default {
-  data: () => ({
-    data: [],
-  }),
-  async fetch() {
-    const data = await this.$content('heatmaps')
-      .where({ slug: this.activeDataset })
-      .fetch()
-      .then((res) => {
-        return res[0];
-      });
-    this.data = data;
+  data() {
+    return {
+      heatmapData: [],
+      interactionsData: [],
+    };
   },
   computed: {
     activeDataset() {
@@ -50,13 +52,46 @@ export default {
     activePlot() {
       return this.$store.getters.activePlot;
     },
+    activeSelection() {
+      return [this.activeLigand, this.activeReceptor];
+    },
   },
   watch: {
-    activeDataset: '$fetch',
+    async activeDataset() {
+      const heatmapData = await this.fetchHeatmapData();
+      this.heatmapData = heatmapData;
+    },
+    activeSelection() {
+      if (!this.activeSelection.includes(null)) {
+        this.fetchInteractionsData();
+      }
+    },
+  },
+  async fetch() {
+    const heatmapData = await this.fetchHeatmapData();
+    this.heatmapData = heatmapData;
   },
   methods: {
     setActivePlot(value) {
       this.$store.dispatch('setActivePlot', value);
+    },
+    async fetchHeatmapData() {
+      const heatmapData = await this.$content('heatmaps')
+        .where({ slug: this.activeDataset })
+        .fetch()
+        .then((res) => {
+          return res[0];
+        });
+      return heatmapData;
+    },
+    async fetchInteractionsData() {
+      const slug = this.activeLigand + '_to_' + this.activeLigand;
+      const interactionsData = await this.$content(
+        'interactions/' + this.activeDataset
+      )
+        .where({ slug })
+        .fetch();
+      this.interactionsData = interactionsData;
     },
   },
 };
