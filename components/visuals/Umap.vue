@@ -32,12 +32,20 @@ export default {
     hoveredReceptor: { type: String },
   },
   async fetch() {
-    const umap1Data = await this.$content('data/umap')
+    const umap1Data = await this.$content('umap')
       .where({ slug: 'umap_he1' })
-      .fetch();
-    const umap2Data = await this.$content('data/umap')
+      .fetch()
+      .then((res) => {
+        console.log('Fetched umap1');
+        return res;
+      });
+    const umap2Data = await this.$content('umap')
       .where({ slug: 'umap_niche2' })
-      .fetch();
+      .fetch()
+      .then((res) => {
+        console.log('Fetched umap2');
+        return res;
+      });
     this.umap1Data = umap1Data;
     this.umap2Data = umap2Data;
   },
