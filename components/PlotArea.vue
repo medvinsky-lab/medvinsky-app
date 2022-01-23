@@ -12,20 +12,24 @@
         @click="setActivePlot('interaction')"
       ></standard-button>
     </div>
-    <heatmap
-      v-if="activePlot === 'heatmap'"
-      :key="activeDataset"
-      :data="heatmapData"
-      :active-ligand="activeLigand"
-      :active-receptor="activeReceptor"
-    ></heatmap>
-    <interaction-plot
-      v-else-if="activePlot === 'interaction' && activeLigand && activeReceptor"
-      :plot-data="interactionsData"
-    ></interaction-plot>
-    <div v-else class="flex flex-grow justify-center items-center">
-      <div class="bg-white p-8 rounded">
-        Please select ligand and receptor populations
+    <div class="flex flex-grow">
+      <heatmap
+        v-if="activePlot === 'heatmap'"
+        :key="activeDataset"
+        :data="heatmapData"
+        :active-ligand="activeLigand"
+        :active-receptor="activeReceptor"
+      ></heatmap>
+      <interaction-plot
+        v-else-if="
+          activePlot === 'interaction' && activeLigand && activeReceptor
+        "
+        :plot-data="interactionsData"
+      ></interaction-plot>
+      <div v-else class="flex flex-grow justify-center items-center">
+        <div class="bg-white p-8 rounded">
+          Please select ligand and receptor populations
+        </div>
       </div>
     </div>
   </main-card>
@@ -85,7 +89,7 @@ export default {
       return heatmapData;
     },
     async fetchInteractionsData() {
-      const slug = this.activeLigand + '_to_' + this.activeLigand;
+      const slug = this.activeLigand + '_to_' + this.activeReceptor;
       const interactionsData = await this.$content(
         'interactions/' + this.activeDataset
       )
