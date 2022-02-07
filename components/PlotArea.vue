@@ -4,52 +4,98 @@
       <standard-button
         label="Heatmap"
         :active="activePlot === 'heatmap'"
-        @click="setPlot('heatmap')"
+        @click="setActivePlot('heatmap')"
       ></standard-button>
       <standard-button
         label="Interactions"
         :active="activePlot === 'interaction'"
-        @click="setPlot('interaction')"
+        @click="setActivePlot('interaction')"
       ></standard-button>
     </div>
-    <div class="bg-white rounded flex flex-grow">
-      <heatmap v-if="activePlot === 'heatmap'" :plot-data="plotData"></heatmap>
-      <interaction-plot v-if="activePlot === 'interaction'"></interaction-plot>
+    <div class="flex flex-grow">
+      <heatmap
+        v-if="activePlot === 'heatmap'"
+        :key="activeDataset"
+        :data="heatmapData"
+        :active-ligand="activeLigand"
+        :active-receptor="activeReceptor"
+      ></heatmap>
+      <interaction-plot
+        v-else-if="
+          activePlot === 'interaction' && activeLigand && activeReceptor
+        "
+        :plot-data="interactionsData"
+      ></interaction-plot>
+      <div v-else class="flex flex-grow justify-center items-center">
+        <div class="bg-white p-8 rounded">
+          Please select ligand and receptor populations
+        </div>
+      </div>
     </div>
   </main-card>
 </template>
 
 <script>
 export default {
-  data: () => ({
-    plotData: [],
-  }),
-  async fetch() {
-    if (this.activeDataset === 'LCM-Seq CS13') {
-      const content = await this.$content('heatmapCS13').fetch();
-      this.plotData = content.body;
-    } else if (this.activeDataset === 'LCM-Seq CS14') {
-      const content = await this.$content('heatmapCS14').fetch();
-      this.plotData = content.body;
-    } else if (this.activeDataset === 'LCM-Seq CS15') {
-      const content = await this.$content('heatmapCS15').fetch();
-      this.plotData = content.body;
-    }
+  data() {
+    return {
+      heatmapData: [],
+      interactionsData: [],
+    };
   },
   computed: {
     activeDataset() {
       return this.$store.getters.activeDataset;
     },
+    activeLigand() {
+      return this.$store.getters.activeLigand;
+    },
+    activeReceptor() {
+      return this.$store.getters.activeReceptor;
+    },
     activePlot() {
       return this.$store.getters.activePlot;
     },
+    activeSelection() {
+      return [this.activeLigand, this.activeReceptor];
+    },
   },
   watch: {
-    activeDataset: '$fetch',
+    async activeDataset() {
+      const heatmapData = await this.fetchHeatmapData();
+      this.heatmapData = heatmapData;
+    },
+    activeSelection() {
+      if (!this.activeSelection.includes(null)) {
+        this.fetchInteractionsData();
+      }
+    },
+  },
+  async fetch() {
+    const heatmapData = await this.fetchHeatmapData();
+    this.heatmapData = heatmapData;
   },
   methods: {
-    setPlot(value) {
-      this.$store.dispatch('setPlot', value);
+    setActivePlot(value) {
+      this.$store.dispatch('setActivePlot', value);
+    },
+    async fetchHeatmapData() {
+      const heatmapData = await this.$content('heatmaps')
+        .where({ slug: this.activeDataset })
+        .fetch()
+        .then((res) => {
+          return res[0];
+        });
+      return heatmapData;
+    },
+    async fetchInteractionsData() {
+      const slug = this.activeLigand + '_to_' + this.activeReceptor;
+      const interactionsData = await this.$content(
+        'interactions/' + this.activeDataset
+      )
+        .where({ slug })
+        .fetch();
+      this.interactionsData = interactionsData;
     },
   },
 };

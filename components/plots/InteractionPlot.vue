@@ -1,49 +1,133 @@
 <template>
-  <div
-    id="chart"
-    ref="chart"
-    class="m-auto w-full overflow-auto container"
-  ></div>
+  <div id="cy" ref="cy" class="flex-grow bg-white rounded"></div>
 </template>
 
 <script>
-import * as d3 from 'd3';
+import cytoscape from 'cytoscape';
+import d3Force from 'cytoscape-d3-force';
+
+cytoscape.use(d3Force);
 
 export default {
-  mounted() {
-    const svg = d3
-      .select('#chart')
-      .append('svg')
-      .attr('height', '620')
-      .attr('width', '100%');
-
-    let yStart = 10;
-    const boxWidth = 150;
-    const boxHeight = 25;
-
-    for (let i = 0; i < 20; i++) {
-      svg
-        .append('rect')
-        .attr('x', 20)
-        .attr('y', yStart)
-        .attr('width', boxWidth)
-        .attr('height', boxHeight)
-        .attr('rx', 5)
-        .attr('ry', 5);
-
-      yStart = yStart + boxHeight + 5;
-    }
+  props: {
+    plotData: {
+      type: Array,
+      default() {
+        return [];
+      },
+    },
   },
-  data: () => ({
-    chartData: [40, 60, 80, 100, 70, 120, 100, 60, 70, 150, 120, 140],
-    barWidth: 40,
-    barOffset: 10,
-  }),
+  methods: {
+    initPlot() {
+      // Initiate interaction plot
+      const cy = cytoscape({
+        container: this.$refs.cy,
+        style: [
+          {
+            selector: '.show',
+            style: {
+              label: 'data(score)',
+              'text-background-opacity': 1,
+              'text-background-shape': 'round-rectangle',
+              'text-background-color': '#f2f6fa',
+              'text-background-padding': 5,
+              'font-weight': 500,
+            },
+          },
+          {
+            selector: 'edge',
+            style: {
+              width: 'mapData(score, 0, 1, 0.2, 20)',
+              'line-opacity': 'mapData(score, 0, 1, 0.5, 1)',
+              'target-arrow-shape': 'triangle',
+              'curve-style': 'bezier',
+            },
+          },
+          {
+            selector: 'node',
+            style: {
+              label: 'data(id)',
+              width: 'mapData(dcn, 0, 1, 10, 50)',
+              height: 'mapData(dcn, 0, 1, 10, 50)',
+            },
+          },
+        ],
+      });
+
+      // Add data
+      this.plotData.forEach((d) => {
+        cy.add([
+          {
+            group: 'nodes',
+            data: { id: d.ligand, type: 'ligand' },
+            style: {
+              shape: 'round-triangle',
+            },
+          },
+          {
+            group: 'nodes',
+            data: { id: d.receptor, type: 'receptor' },
+            style: {
+              shape: 'circle',
+            },
+          },
+          {
+            group: 'edges',
+            data: {
+              id: d.ligand + d.receptor,
+              source: d.ligand,
+              target: d.receptor,
+              score: Math.round(parseFloat(d.score) * 100) / 100,
+            },
+          },
+        ]);
+      });
+
+      // Color top N interactions
+      const n = 15;
+      cy.edges()
+        .sort((a, b) => {
+          return b - a;
+        })
+        .slice(0, n)
+        .style({
+          'line-color': 'red',
+          'target-arrow-color': 'red',
+        });
+
+      // Click to show label
+      cy.on('click', 'edge', (event) => {
+        event.target.toggleClass('show');
+      });
+
+      // Calculate node degrees and add as data
+      const dcn = cy.elements().degreeCentralityNormalized();
+      cy.nodes().forEach((n) => {
+        n.data({
+          dcn: dcn.degree(n),
+        });
+      });
+
+      // Run layout
+      cy.layout({
+        name: 'd3-force',
+        fit: false,
+        infinite: false,
+        linkId: function id(d) {
+          return d.id;
+        },
+        linkDistance: 40,
+        manyBodyStrength: -300,
+      }).run();
+    },
+  },
+  watch: {
+    plotData() {
+      this.initPlot();
+    },
+  },
+  mounted() {
+    this.initPlot();
+  },
 };
 </script>
-
-<style scoped>
-.container {
-  height: 500px;
-}
-</style>

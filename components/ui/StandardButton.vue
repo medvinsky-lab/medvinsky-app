@@ -1,7 +1,7 @@
 <template>
   <button
     :class="{
-      'bg-yellow-400': activated,
+      active: activated,
       'text-gray-900': activated,
     }"
     class="py-1 px-2 bg-gray-900 text-gray-50 rounded"
@@ -44,3 +44,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.active {
+  background-color: #f7c59f;
+}
+</style>

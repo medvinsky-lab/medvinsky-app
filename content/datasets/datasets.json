@@ -1,0 +1,6 @@
+[
+  { "id": "cs13", "label": "LCM-Seq CS13" },
+  { "id": "cs14", "label": "LCM-Seq CS14" },
+  { "id": "cs16", "label": "LCM-Seq CS16" },
+  { "id": "umap", "label": "UMAP CS13-CS15" }
+]

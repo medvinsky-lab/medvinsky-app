@@ -1,5 +1,5 @@
 <template>
-  <div class="p-20 bg-white rounded">
+  <div class="flex flex-grow p-14 bg-white rounded justify-center items-center">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 453.45 411.77">
       <g id="Lager_2" data-name="Lager 2">
         <g id="Lager_1-2" data-name="Lager 1">
@@ -97,7 +97,7 @@
             id="g-outer"
             class="cls-12"
             :class="
-              input.includes('Gonadal epithelium outer')
+              input.includes('gonadal_epithelium_outer')
                 ? 'opacity-100'
                 : 'opacity-20'
             "
@@ -107,7 +107,7 @@
             id="g-inner"
             class="cls-13"
             :class="
-              input.includes('Gonadal epithelium inner')
+              input.includes('gonadal_epithelium_inner')
                 ? 'opacity-100'
                 : 'opacity-20'
             "
@@ -117,7 +117,7 @@
             id="g-outer"
             class="cls-12"
             :class="
-              input.includes('Gonadal epithelium outer')
+              input.includes('gonadal_epithelium_outer')
                 ? 'opacity-100'
                 : 'opacity-20'
             "
@@ -127,7 +127,7 @@
             id="g-inner"
             class="cls-13"
             :class="
-              input.includes('Gonadal epithelium inner')
+              input.includes('gonadal_epithelium_inner')
                 ? 'opacity-100'
                 : 'opacity-20'
             "
@@ -147,7 +147,7 @@
             id="d-outer"
             class="cls-16"
             :class="
-              input.includes('Dorsal outer') ? 'opacity-100' : 'opacity-20'
+              input.includes('dorsal_outer') ? 'opacity-100' : 'opacity-20'
             "
             d="M183.75,284.51c-3.39-28.66,12.85-40.14,25.57-37.8a113,113,0,0,0,39,0c12.73-2.28,29,9.14,25.57,37.8,0,.25-.07.49-.1.74h13.58c2.42-21.42-4.2-34-10.2-40.73a32.59,32.59,0,0,0-24.2-11.2,30.16,30.16,0,0,0-5.29.47,108.07,108.07,0,0,1-19,1.64A104.32,104.32,0,0,1,210,233.8a29.45,29.45,0,0,0-5.39-.49,32.48,32.48,0,0,0-24.13,11.18c-6,6.76-12.63,19.33-10.21,40.76h13.58C183.82,285,183.78,284.76,183.75,284.51Z"
           />
@@ -155,7 +155,7 @@
             id="d-inner"
             class="cls-19"
             :class="
-              input.includes('Dorsal inner') ? 'opacity-100' : 'opacity-20'
+              input.includes('dorsal_inner') ? 'opacity-100' : 'opacity-20'
             "
             d="M248.36,246.71a113,113,0,0,1-39,0c-12.72-2.34-29,9.14-25.57,37.8,0,.25.07.49.11.74h13.3c-.1-.57-.19-1.15-.26-1.74-1.1-9.25.4-16.71,4.22-21a9.5,9.5,0,0,1,7-3.45,7.2,7.2,0,0,1,1.32.12,107.43,107.43,0,0,0,19.27,1.7,110.7,110.7,0,0,0,19.44-1.69,7,7,0,0,1,1.31-.12,9.52,9.52,0,0,1,7.08,3.47c3.81,4.29,5.31,11.74,4.22,21q-.1.89-.27,1.74h13.31c0-.25.07-.49.1-.74C277.32,255.85,261.09,244.43,248.36,246.71Z"
           />
@@ -163,7 +163,7 @@
             id="v-outer"
             class="cls-17"
             :class="
-              input.includes('Ventral outer') ? 'opacity-100' : 'opacity-20'
+              input.includes('ventral_outer') ? 'opacity-100' : 'opacity-20'
             "
             d="M273.83,285.25c-3.22,23.57-25.47,38.84-45,38.84s-41.77-15.27-45-38.84H170.28c0,.16,0,.3,0,.46,3.76,31.8,33.31,51.48,58.52,51.48s54.76-19.68,58.52-51.48c0-.16,0-.3.05-.46Z"
           />
@@ -171,7 +171,7 @@
             id="v-inner"
             class="cls-18"
             :class="
-              input.includes('Ventral inner') ? 'opacity-100' : 'opacity-20'
+              input.includes('ventral_inner') ? 'opacity-100' : 'opacity-20'
             "
             d="M228.84,311.45c-13.34,0-28.83-10.45-31.68-26.2h-13.3c3.21,23.57,25.47,38.84,45,38.84s41.77-15.27,45-38.84H260.52C257.67,301,242.19,311.45,228.84,311.45Z"
           />
@@ -184,11 +184,11 @@
 <script>
 export default {
   props: {
-    ligand: {
+    hoveredLigand: {
       type: String,
       default: null,
     },
-    receptor: {
+    hoveredReceptor: {
       type: String,
       default: null,
     },
@@ -197,7 +197,12 @@ export default {
     input() {
       const activeLigand = this.$store.getters.activeLigand;
       const activeReceptor = this.$store.getters.activeReceptor;
-      return [activeLigand, this.ligand, activeReceptor, this.receptor];
+      return [
+        activeLigand,
+        this.hoveredLigand,
+        activeReceptor,
+        this.hoveredReceptor,
+      ];
     },
   },
 };

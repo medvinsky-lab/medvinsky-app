@@ -1,6 +1,6 @@
 <template>
-  <main-card>
-    <div class="h-20">
+  <main-card class="flex flex-col justify-between">
+    <div class="mb-6">
       <h1>Tutorial</h1>
     </div>
     <ol class="list-decimal list-inside">
@@ -23,8 +23,9 @@
         Use the heatmap to view overall interaction strengh between populations
       </li>
       <li>
-        The interaction plot shows the top 20 interactions between selected
-        populations
+        The interaction plot shows the top
+        <span class="text-green-500 font-bold">15</span> interactions between
+        selected populations
       </li>
     </ol>
   </main-card>

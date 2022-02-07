@@ -1,81 +1,126 @@
 <template>
   <main-card class="flex flex-col">
-    <div class="flex flex-row space-x-2 h-16 w-full">
-      <drop-down
-        label="Dataset"
-        description="Select dataset"
-        :items="datasets"
-        @dispatch="reset"
-      ></drop-down>
-      <drop-down
-        label="Ligand"
-        description="Select ligand region"
-        :items="ligands"
-        @hover="propagateLigand"
-      ></drop-down>
-      <drop-down
-        label="Receptor"
-        description="Select receptor region"
-        :items="receptors"
-        @hover="propagateReceptor"
-      ></drop-down>
+    <div class="w-full flex flex-row space-x-2">
+      <div class="w-1/3 h-16 relative">
+        <drop-down
+          label="Dataset"
+          :selection="activeDataset"
+          :items="datasets"
+          @dispatch="setActiveDataset"
+        ></drop-down>
+      </div>
+      <div class="w-1/3 h-16 relative">
+        <drop-down
+          ref="dropdown-ligand"
+          label="Ligand"
+          default-description="Select ligand region"
+          :selection="activeLigand"
+          :items="ligands"
+          @dispatch="setActiveLigand"
+          @hover="setHoveredLigand"
+        ></drop-down>
+      </div>
+      <div class="w-1/3 h-16 relative">
+        <drop-down
+          ref="dropdown-receptor"
+          label="Receptor"
+          default-description="Select receptor region"
+          :selection="activeReceptor"
+          :items="receptors"
+          @dispatch="setActiveReceptor"
+          @hover="setHoveredReceptor"
+        ></drop-down>
+      </div>
     </div>
-    <div>
+    <div class="flex-grow">
       <cs-13
-        v-if="activeDataset === 'LCM-Seq CS13'"
-        :ligand="ligand"
-        :receptor="receptor"
+        v-if="activeDataset === 'cs13'"
+        :hovered-ligand="hoveredLigand"
+        :hovered-receptor="hoveredReceptor"
       ></cs-13>
+      <cs-14
+        v-else-if="activeDataset === 'cs14'"
+        :hovered-ligand="hoveredLigand"
+        :hovered-receptor="hoveredReceptor"
+      ></cs-14>
+      <cs-16
+        v-else-if="activeDataset === 'cs16'"
+        :hovered-ligand="hoveredLigand"
+        :hovered-receptor="hoveredReceptor"
+      ></cs-16>
+      <umap
+        v-else-if="activeDataset === 'umap'"
+        :active-ligand="activeLigand"
+        :active-receptor="activeReceptor"
+        :hovered-ligand="hoveredLigand"
+        :hovered-receptor="hoveredReceptor"
+      ></umap>
     </div>
   </main-card>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      datasets: [
-        { id: 'cs13', label: 'LCM-Seq CS13' },
-        { id: 'cs14', label: 'LCM-Seq CS14' },
-        { id: 'cs15', label: 'LCM-Seq CS15' },
-        { id: 'umap', label: 'UMAP CS13-CS15' },
-      ],
-      ligands: [
-        { id: 'do', label: 'Dorsal outer' },
-        { id: 'di', label: 'Dorsal inner' },
-        { id: 'vo', label: 'Ventral outer' },
-        { id: 'vi', label: 'Ventral inner' },
-        { id: 'geo', label: 'Gonadal epithelium outer' },
-        { id: 'gei', label: 'Gonadal epithelium inner' },
-      ],
-      receptors: [
-        { id: 'do', label: 'Dorsal outer' },
-        { id: 'di', label: 'Dorsal inner' },
-        { id: 'vo', label: 'Ventral outer' },
-        { id: 'vi', label: 'Ventral inner' },
-        { id: 'geo', label: 'Gonadal epithelium outer' },
-        { id: 'gei', label: 'Gonadal epithelium inner' },
-      ],
-      ligand: null,
-      receptor: null,
-    };
-  },
+  data: () => ({
+    datasets: [],
+    ligands: [],
+    receptors: [],
+    hoveredLigand: null,
+    hoveredReceptor: null,
+  }),
   computed: {
     activeDataset() {
       return this.$store.getters.activeDataset;
     },
+    activeLigand() {
+      return this.$store.getters.activeLigand;
+    },
+    activeReceptor() {
+      return this.$store.getters.activeReceptor;
+    },
   },
   methods: {
-    reset() {
-      this.ligand = null;
-      this.receptor = null;
+    setActiveDataset(item) {
+      this.$store.dispatch('setActiveDataset', item.id);
+      this.$store.dispatch('setActiveLigand', null);
+      this.$store.dispatch('setActiveReceptor', null);
     },
-    propagateLigand(value) {
-      this.ligand = value;
+    setActiveLigand(item) {
+      this.$store.dispatch('setActiveLigand', item.id);
     },
-    propagateReceptor(value) {
-      this.receptor = value;
+    setActiveReceptor(item) {
+      this.$store.dispatch('setActiveReceptor', item.id);
     },
+    setHoveredLigand(item) {
+      this.hoveredLigand = item;
+    },
+    setHoveredReceptor(item) {
+      this.hoveredReceptor = item;
+    },
+  },
+  async fetch() {
+    this.datasets = await this.$content('datasets').fetch();
+    this.ligands = await this.$content('heatmaps')
+      .where({
+        slug: this.activeDataset,
+      })
+      .only(['axis'])
+      .fetch()
+      .then((value) => {
+        return value[0].axis;
+      });
+    this.receptors = await this.$content('heatmaps')
+      .where({
+        slug: this.activeDataset,
+      })
+      .only(['axis'])
+      .fetch()
+      .then((value) => {
+        return value[0].axis;
+      });
+  },
+  watch: {
+    activeDataset: '$fetch',
   },
 };
 </script>
