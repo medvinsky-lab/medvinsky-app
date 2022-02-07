@@ -1,11 +1,6 @@
 <template>
   <div class="flex flex-grow p-14 bg-white rounded justify-center items-center">
-    <svg
-      id="Lager_1"
-      data-name="Lager 1"
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 453.45 411.77"
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 453.45 411.77">
       <defs>
         <style>
           .cls-1 {

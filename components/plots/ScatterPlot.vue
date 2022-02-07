@@ -1,6 +1,10 @@
 <template>
   <div>
-    <highchart :options="chartOptions" @chartLoaded="chartLoaded" />
+    <highchart
+      class="rounded"
+      :options="chartOptions"
+      @chartLoaded="chartLoaded"
+    />
   </div>
 </template>
 

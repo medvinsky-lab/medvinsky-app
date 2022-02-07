@@ -1,10 +1,12 @@
 <template>
-  <highchart
-    class="flex-grow rounded"
-    :options="chartOptions"
-    :modules="['heatmap']"
-    @chartLoaded="chartLoaded"
-  />
+  <div class="flex">
+    <highchart
+      class="flex-grow rounded"
+      :options="chartOptions"
+      :modules="['heatmap']"
+      @chartLoaded="chartLoaded"
+    />
+  </div>
 </template>
 
 <script>
@@ -41,9 +43,14 @@ export default {
       }
       await new Promise((resolve, reject) => {
         setTimeout(() => {
-          console.log('Done waiting');
           resolve();
-        }, 1000);
+        }, 500);
+      });
+      chart.reflow();
+      await new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve();
+        }, 500);
       });
 
       Object.values(dropdowns).forEach((d) => {

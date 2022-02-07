@@ -32,24 +32,24 @@
         ></drop-down>
       </div>
     </div>
-    <div class="flex flex-grow">
+    <div class="flex-grow">
       <cs-13
         v-if="activeDataset === 'cs13'"
         :hovered-ligand="hoveredLigand"
         :hovered-receptor="hoveredReceptor"
       ></cs-13>
       <cs-14
-        v-if="activeDataset === 'cs14'"
+        v-else-if="activeDataset === 'cs14'"
         :hovered-ligand="hoveredLigand"
         :hovered-receptor="hoveredReceptor"
       ></cs-14>
       <cs-16
-        v-if="activeDataset === 'cs16'"
+        v-else-if="activeDataset === 'cs16'"
         :hovered-ligand="hoveredLigand"
         :hovered-receptor="hoveredReceptor"
       ></cs-16>
       <umap
-        v-if="activeDataset === 'umap'"
+        v-else-if="activeDataset === 'umap'"
         :active-ligand="activeLigand"
         :active-receptor="activeReceptor"
         :hovered-ligand="hoveredLigand"

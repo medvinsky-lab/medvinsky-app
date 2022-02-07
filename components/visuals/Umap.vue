@@ -1,7 +1,7 @@
 <template>
   <div class="flex-grow">
     <scatter-plot
-      class="mb-4 rounded"
+      class="mb-4"
       title="Hematoendothelial"
       x-axis-title="UMAP1"
       y-axis-title="UMAP2"
@@ -9,7 +9,6 @@
       :selections="[activeLigand, activeReceptor]"
     />
     <scatter-plot
-      class="rounded"
       title="Mesenchymal/epithelial"
       x-axis-title="UMAP1"
       y-axis-title="UMAP2"
