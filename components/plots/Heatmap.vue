@@ -106,6 +106,12 @@ export default {
         xAxis: {
           categories: this.axis,
           gridLineWidth: 0,
+          title: {
+            text: 'Receptor',
+            style: {
+              fontWeight: 'bold',
+            },
+          },
           lineWidth: 0,
           labels: {
             rotation: 0,
@@ -119,7 +125,12 @@ export default {
         yAxis: {
           categories: this.axis,
           gridLineWidth: 0,
-          title: null,
+          title: {
+            text: 'Ligand',
+            style: {
+              fontWeight: 'bold',
+            },
+          },
           reversed: true,
           labels: {
             enabled: true,
@@ -167,6 +178,9 @@ export default {
             dataLabels: {
               enabled: true,
               color: '#000000',
+              style: {
+                textOutline: '0px',
+              },
             },
             borderRadius: 10,
             borderColor: 'white',
