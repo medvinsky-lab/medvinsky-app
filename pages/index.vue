@@ -16,7 +16,3 @@ h1 {
   @apply text-2xl font-bold;
 }
 </style>
-
-<script>
-export default {};
-</script>
