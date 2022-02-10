@@ -288,6 +288,25 @@
  */
 
 
+/*!
+  * vue-router v3.5.3
+  * (c) 2021 Evan You
+  * @license MIT
+  */
+
+/*!
+ * Vue.js v2.6.14
+ * (c) 2014-2021 Evan You
+ * Released under the MIT License.
+ */
+
+/*!
+ * vuex v3.6.2
+ * (c) 2021 Evan You
+ * @license MIT
+ */
+
+
 /**
  * @license Highcharts JS v9.3.3 (2022-02-01)
  *
@@ -308,6 +327,17 @@
  *
  * License: www.highcharts.com/license
  */
+
+
+/*!
+Embeddable Minimum Strictly-Compliant Promises/A+ 1.1.1 Thenable
+Copyright (c) 2013-2014 Ralf S. Engelschall (http://engelschall.com)
+Licensed under The MIT License (http://opensource.org/licenses/MIT)
+*/
+
+/*! Bezier curve function generator. Copyright Gaetan Renaudeau. MIT License: http://en.wikipedia.org/wiki/MIT_License */
+
+/*! Runge-Kutta spring physics function generator. Adapted from Framer.js, copyright Koen Bok. MIT License: http://en.wikipedia.org/wiki/MIT_License */
 
 
 /**
@@ -476,30 +506,6 @@
  */
 
 
-/*!
-Embeddable Minimum Strictly-Compliant Promises/A+ 1.1.1 Thenable
-Copyright (c) 2013-2014 Ralf S. Engelschall (http://engelschall.com)
-Licensed under The MIT License (http://opensource.org/licenses/MIT)
-*/
-
-/*! Bezier curve function generator. Copyright Gaetan Renaudeau. MIT License: http://en.wikipedia.org/wiki/MIT_License */
-
-/*! Runge-Kutta spring physics function generator. Adapted from Framer.js, copyright Koen Bok. MIT License: http://en.wikipedia.org/wiki/MIT_License */
-
-
-/*!
- * vue-client-only v0.0.0-semantic-release
- * (c) 2021-present egoist <0x142857@gmail.com>
- * Released under the MIT License.
- */
-
-/*!
- * vue-no-ssr v1.1.1
- * (c) 2018-present egoist <0x142857@gmail.com>
- * Released under the MIT License.
- */
-
-
 /**
  * @license Highcharts JS v9.3.3 (2022-02-01)
  *
@@ -541,25 +547,6 @@ Licensed under The MIT License (http://opensource.org/licenses/MIT)
  * (c) 2016-2021 Lars A. V. Cabrera
  *
  * License: www.highcharts.com/license
- */
-
-
-/*!
-  * vue-router v3.5.3
-  * (c) 2021 Evan You
-  * @license MIT
-  */
-
-/*!
- * Vue.js v2.6.14
- * (c) 2014-2021 Evan You
- * Released under the MIT License.
- */
-
-/*!
- * vuex v3.6.2
- * (c) 2021 Evan You
- * @license MIT
  */
 
 
@@ -617,6 +604,19 @@ Licensed under The MIT License (http://opensource.org/licenses/MIT)
  * Author: Kacper Madej
  *
  * License: www.highcharts.com/license
+ */
+
+
+/*!
+ * vue-client-only v0.0.0-semantic-release
+ * (c) 2021-present egoist <0x142857@gmail.com>
+ * Released under the MIT License.
+ */
+
+/*!
+ * vue-no-ssr v1.1.1
+ * (c) 2018-present egoist <0x142857@gmail.com>
+ * Released under the MIT License.
  */
 
 
