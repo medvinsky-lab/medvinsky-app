@@ -1,6 +1,8 @@
 <template>
-  <main-card class="flex flex-col">
-    <div class="mb-2 flex flex-row space-x-2 h-14 flex-wrap content-end">
+  <main-card class="flex flex-col space-y-2">
+    <div
+      class="flex flex-row space-x-2 h-16 flex-wrap content-end -mb-2 py-2.5"
+    >
       <standard-button
         label="Heatmap"
         :active="activePlot === 'heatmap'"
@@ -32,6 +34,51 @@
         </div>
       </div>
     </div>
+    <div class="bg-white p-4 rounded h-40">
+      <p class="text-sm font-bold">Explanation</p>
+      <p>Placeholder</p>
+    </div>
+    <!-- <div class="mb-2 flex flex-row space-x-2 h-14 flex-wrap content-end">
+      <standard-button
+        label="Heatmap"
+        :active="activePlot === 'heatmap'"
+        @click="setActivePlot('heatmap')"
+      ></standard-button>
+      <standard-button
+        label="Interactions"
+        :active="activePlot === 'interaction'"
+        @click="setActivePlot('interaction')"
+      ></standard-button>
+    </div> -->
+    <!-- <div class="flex flex-grow mb-2">
+      <heatmap
+        v-if="activePlot === 'heatmap'"
+        :key="activeDataset"
+        :data="heatmapData"
+        :active-ligand="activeLigand"
+        :active-receptor="activeReceptor"
+      ></heatmap>
+      <interaction-plot
+        v-else-if="
+          activePlot === 'interaction' && activeLigand && activeReceptor
+        "
+        :plot-data="interactionsData"
+      ></interaction-plot>
+      <div v-else class="flex flex-grow justify-center items-center">
+        <div class="bg-white p-8 rounded">
+          Please select ligand and receptor populations
+        </div>
+      </div>
+    </div> -->
+    <!-- <div class="flex-grow bg-white p-4 rounded">
+      <p class="text-sm font-bold">Explanation</p>
+      <p>
+        Spatial transcriptome schematics show transverse sections of the human
+        embryo including the neural tube, dorsal aorta and urogenital ridges.
+        Sub-dissected domains around the dorsal aorta, where hematopoietic stem
+        cells first emerge from the ventral vessel wall, are highlighted.
+      </p>
+    </div> -->
   </main-card>
 </template>
 

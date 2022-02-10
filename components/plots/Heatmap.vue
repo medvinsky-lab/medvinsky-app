@@ -1,12 +1,10 @@
 <template>
-  <div class="flex">
-    <highchart
-      class="flex-grow rounded"
-      :options="chartOptions"
-      :modules="['heatmap']"
-      @chartLoaded="chartLoaded"
-    />
-  </div>
+  <highchart
+    class="flex-grow rounded"
+    :options="chartOptions"
+    :modules="['heatmap']"
+    @chartLoaded="chartLoaded"
+  />
 </template>
 
 <script>

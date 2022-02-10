@@ -1,7 +1,7 @@
 <template>
-  <main-card class="flex flex-col">
-    <div class="w-full flex flex-row space-x-2">
-      <div class="w-1/3 h-16 relative">
+  <main-card>
+    <div class="flex flex-row space-x-2 h-16">
+      <div class="w-1/3 relative">
         <drop-down
           label="Dataset"
           :selection="activeDataset"
@@ -9,7 +9,7 @@
           @dispatch="setActiveDataset"
         ></drop-down>
       </div>
-      <div class="w-1/3 h-16 relative">
+      <div class="w-1/3 relative">
         <drop-down
           ref="dropdown-ligand"
           label="Ligand"
@@ -20,7 +20,7 @@
           @hover="setHoveredLigand"
         ></drop-down>
       </div>
-      <div class="w-1/3 h-16 relative">
+      <div class="w-1/3 relative">
         <drop-down
           ref="dropdown-receptor"
           label="Receptor"
@@ -32,7 +32,7 @@
         ></drop-down>
       </div>
     </div>
-    <div class="flex-grow">
+    <div class="flex-grow mb-2">
       <cs-13
         v-if="activeDataset === 'cs13'"
         :hovered-ligand="hoveredLigand"
@@ -55,6 +55,15 @@
         :hovered-ligand="hoveredLigand"
         :hovered-receptor="hoveredReceptor"
       ></umap>
+    </div>
+    <div class="bg-white p-4 rounded h-40">
+      <p class="text-sm font-bold">Explanation</p>
+      <p>
+        Spatial transcriptome schematics show transverse sections of the human
+        embryo including the neural tube, dorsal aorta and urogenital ridges.
+        Sub-dissected domains around the dorsal aorta, where hematopoietic stem
+        cells first emerge from the ventral vessel wall, are highlighted.
+      </p>
     </div>
   </main-card>
 </template>
