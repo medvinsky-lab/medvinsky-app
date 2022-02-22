@@ -36,49 +36,19 @@
     </div>
     <div class="bg-white p-4 rounded h-40">
       <p class="text-sm font-bold">Explanation</p>
-      <p>Placeholder</p>
-    </div>
-    <!-- <div class="mb-2 flex flex-row space-x-2 h-14 flex-wrap content-end">
-      <standard-button
-        label="Heatmap"
-        :active="activePlot === 'heatmap'"
-        @click="setActivePlot('heatmap')"
-      ></standard-button>
-      <standard-button
-        label="Interactions"
-        :active="activePlot === 'interaction'"
-        @click="setActivePlot('interaction')"
-      ></standard-button>
-    </div> -->
-    <!-- <div class="flex flex-grow mb-2">
-      <heatmap
-        v-if="activePlot === 'heatmap'"
-        :key="activeDataset"
-        :data="heatmapData"
-        :active-ligand="activeLigand"
-        :active-receptor="activeReceptor"
-      ></heatmap>
-      <interaction-plot
-        v-else-if="
-          activePlot === 'interaction' && activeLigand && activeReceptor
-        "
-        :plot-data="interactionsData"
-      ></interaction-plot>
-      <div v-else class="flex flex-grow justify-center items-center">
-        <div class="bg-white p-8 rounded">
-          Please select ligand and receptor populations
-        </div>
-      </div>
-    </div> -->
-    <!-- <div class="flex-grow bg-white p-4 rounded">
-      <p class="text-sm font-bold">Explanation</p>
-      <p>
-        Spatial transcriptome schematics show transverse sections of the human
-        embryo including the neural tube, dorsal aorta and urogenital ridges.
-        Sub-dissected domains around the dorsal aorta, where hematopoietic stem
-        cells first emerge from the ventral vessel wall, are highlighted.
+      <p v-if="activePlot === 'heatmap'">
+        Heatmap shows the summed-specificity weights between each domain/cell
+        type ligand-receptor pair. Pairs connected by many specific edges will
+        have higher summed-specificity weights i.e. greater predicted signaling
+        interactions.
       </p>
-    </div> -->
+      <p v-if="activePlot === 'interaction'">
+        The Interactions tab show NATMI predicted ligand-receptor interactions
+        for the selected domains as a network. The top 15 specificity weights
+        are highlighted by red arrows. Node size is proportional to the number
+        of interactions.
+      </p>
+    </div>
   </main-card>
 </template>
 

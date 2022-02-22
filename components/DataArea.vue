@@ -58,11 +58,16 @@
     </div>
     <div class="bg-white p-4 rounded h-40">
       <p class="text-sm font-bold">Explanation</p>
-      <p>
+      <p v-if="this.activeDataset.includes('cs')">
         Spatial transcriptome schematics show transverse sections of the human
         embryo including the neural tube, dorsal aorta and urogenital ridges.
         Sub-dissected domains around the dorsal aorta, where hematopoietic stem
         cells first emerge from the ventral vessel wall, are highlighted.
+      </p>
+      <p v-if="this.activeDataset === 'umap'">
+        The UMAP dataset shows hematopoietic stem/progenitor cells and niche
+        populations within the dorsal aorta and sub-aortic mesenchyme of human
+        embryos CS13-15.
       </p>
     </div>
   </main-card>
