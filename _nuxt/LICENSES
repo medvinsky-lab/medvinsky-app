@@ -149,6 +149,19 @@ Licensed under The MIT License (http://opensource.org/licenses/MIT)
  */
 
 
+/*!
+ * vue-client-only v0.0.0-semantic-release
+ * (c) 2021-present egoist <0x142857@gmail.com>
+ * Released under the MIT License.
+ */
+
+/*!
+ * vue-no-ssr v1.1.1
+ * (c) 2018-present egoist <0x142857@gmail.com>
+ * Released under the MIT License.
+ */
+
+
 /**
  * @license Highcharts JS v9.3.3 (2022-02-01)
  *
@@ -668,16 +681,14 @@ Licensed under The MIT License (http://opensource.org/licenses/MIT)
  */
 
 
-/*!
- * vue-client-only v0.0.0-semantic-release
- * (c) 2021-present egoist <0x142857@gmail.com>
- * Released under the MIT License.
- */
-
-/*!
- * vue-no-ssr v1.1.1
- * (c) 2018-present egoist <0x142857@gmail.com>
- * Released under the MIT License.
+/**
+ * @license Highcharts JS v9.3.3 (2022-02-01)
+ *
+ * Exporting module
+ *
+ * (c) 2010-2021 Torstein Honsi
+ *
+ * License: www.highcharts.com/license
  */
 
 
